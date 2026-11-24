@@ -1138,7 +1138,7 @@ function restore(){
   const c=tgCloud();
   if(c){try{c.getItem(SKEY,function(err,val){
     if(err||!val)return;
-    try{if(applySaved(JSON.parse(val)))openApp()}catch(e){}
+    try{if(applySaved(JSON.parse(val))){save();openApp()}}catch(e){}
   })}catch(e){}}
 }
 function secretTap(){
@@ -1298,6 +1298,7 @@ function avgRange(key,from,to){
   for(let d=from;d<=to;d++){const r=state.log[d];if(r&&r[key]!==null&&r[key]!==undefined){sum+=r[key];n++}}
   return n?sum/n:null;
 }
+function dec(v){return (v===undefined||v===null||v==='')?'':String(v).replace('.',',')}
 function fmt(v,d){return (v===null||v===undefined)?'—':v.toFixed(d===undefined?1:d).replace('.',',').replace(',0','')}
 function delta(now,was,unit,lowerBetter){
   if(now===null||was===null)return '<b>—</b>';
@@ -1444,12 +1445,12 @@ function renderDiary(){
   const md=measDays(), last=md.length?state.meas[md[md.length-1]]:{};
   const cur=state.meas[state.day];
   const v=cur||{};
-  document.getElementById('mW').value=v.w!==undefined&&v.w!==null?v.w:'';
-  document.getElementById('mT').value=v.t!==undefined&&v.t!==null?v.t:'';
-  document.getElementById('mB').value=v.b!==undefined&&v.b!==null?v.b:'';
-  document.getElementById('mH').value=v.h!==undefined&&v.h!==null?v.h:'';
-  document.getElementById('mG').value=state.height||'';
-  if(!cur&&last.w){document.getElementById('mW').placeholder='в прошлый раз '+last.w}
+  document.getElementById('mW').value=dec(v.w);
+  document.getElementById('mT').value=dec(v.t);
+  document.getElementById('mB').value=dec(v.b);
+  document.getElementById('mH').value=dec(v.h);
+  document.getElementById('mG').value=dec(state.height);
+  if(!cur&&last.w){document.getElementById('mW').placeholder='в прошлый раз '+dec(last.w)}
   renderDyn();
 }
 
