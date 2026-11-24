@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>КЛЮЧ · 28 дней · UNAGE</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lime:#C6D93C; --olive:#9CB53B; --coral:#EF5B3F; --choco:#3D2A1F;
+  --gray:#78726A; --white:#FFFFFF; --line:#EDEAE4; --soft:#F7F6F2; --limesoft:#F3F7DC;
+  --radius:18px; --maxw:480px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--soft); color:var(--choco);
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Lora',Georgia,serif; font-weight:500; margin:0 0 10px; line-height:1.25}
+h1{font-size:26px} h2{font-size:21px} h3{font-size:18px} h4{font-size:16px}
+p{margin:0 0 12px}
+b,strong{font-weight:600}
+a{color:var(--olive)}
+.wrap{max-width:var(--maxw);margin:0 auto;background:var(--soft);min-height:100vh;padding-bottom:96px}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--line);padding:14px 20px 12px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-family:'Lora',serif;font-size:19px;letter-spacing:.14em;text-transform:uppercase}
+.logo i{font-style:normal;color:var(--coral)}
+.sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray)}
+
+/* screens */
+.screen{display:none;padding:18px 20px 10px}
+.screen.on{display:block}
+
+/* cards */
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:0 0 14px}
+.card.lime{background:var(--limesoft);border-color:#E3EDBD}
+.card.flat{background:transparent;border:none;padding:0}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.note{background:var(--limesoft);border-radius:14px;padding:14px 16px;font-size:14.5px;margin:12px 0}
+.warn{background:#FDEDE9;border-radius:14px;padding:14px 16px;font-size:14.5px;margin:12px 0}
+.why{background:var(--soft);border-left:3px solid var(--lime);border-radius:0 12px 12px 0;padding:12px 14px;margin:14px 0 0;font-size:14.5px}
+.why p:last-child{margin-bottom:0}
+.why .eyebrow{margin-bottom:4px}
+.q{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px;font-size:14.5px;color:var(--gray)}
+.q b{color:var(--choco)}
+
+/* day nav */
+.daybar{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.daybar button{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--white);font-size:17px;color:var(--choco);cursor:pointer}
+.daybar button:disabled{opacity:.3}
+.daynum{flex:1;text-align:center}
+.daynum .n{font-family:'Lora',serif;font-size:22px}
+.daynum .w{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray)}
+
+/* steps */
+ol.steps{margin:4px 0 0;padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding-left:34px;margin-bottom:11px}
+ol.steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:23px;height:23px;border-radius:50%;background:var(--lime);color:var(--choco);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ul.plain{margin:4px 0 0;padding-left:18px}
+ul.plain li{margin-bottom:8px}
+
+/* grid 28 */
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:4px}
+.cell{aspect-ratio:1;border-radius:9px;background:var(--soft);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gray);cursor:pointer}
+.cell.done{background:var(--lime);border-color:var(--olive);color:var(--choco);font-weight:700}
+.cell.now{box-shadow:0 0 0 2px var(--coral)}
+
+/* buttons */
+.btn{display:block;width:100%;text-align:center;padding:15px 18px;border-radius:14px;border:none;font-family:'Manrope',sans-serif;font-size:15.5px;font-weight:600;cursor:pointer;text-decoration:none;margin-bottom:10px}
+.btn.prim{background:var(--coral);color:#fff}
+.btn.lime{background:var(--lime);color:var(--choco)}
+.btn.ghost{background:var(--white);color:var(--choco);border:1px solid var(--line)}
+.btn.link{background:transparent;color:var(--gray);font-size:14px;font-weight:500;text-decoration:underline;padding:8px}
+.back{background:none;border:none;color:var(--gray);font-size:14px;padding:0 0 12px;cursor:pointer}
+
+/* list rows */
+.row{display:block;width:100%;text-align:left;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:9px;cursor:pointer;font-family:inherit;font-size:15.5px;color:var(--choco)}
+.row .num{font-size:11.5px;letter-spacing:.1em;color:var(--olive);display:block;margin-bottom:3px}
+.row .ttl{font-family:'Lora',serif;font-size:16.5px;line-height:1.3}
+.weekhead{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin:18px 0 9px}
+.weekhead:first-child{margin-top:0}
+
+/* test */
+.qwrap{margin-bottom:18px}
+.qtext{font-size:15.5px;margin-bottom:10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.opt{padding:11px 8px;border-radius:11px;border:1px solid var(--line);background:var(--white);font-size:13px;font-family:inherit;color:var(--choco);cursor:pointer}
+.opt.sel{background:var(--lime);border-color:var(--olive);font-weight:600}
+.chain{display:flex;gap:7px;margin:14px 0}
+.chain>div{flex:1;min-width:0;text-align:center;padding:11px 4px;border-radius:12px;font-size:11.5px;line-height:1.3;border:1px solid var(--line);background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:86px}
+.chain .score{margin-top:6px}
+.chain>div.g{background:#EEF5D6;border-color:#D7E5A8}
+.chain>div.y{background:#FBF3D7;border-color:#EEDFA6}
+.chain>div.r{background:#FBE2DC;border-color:#F0BDB0}
+.chain b{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+.score{font-size:12px;color:var(--gray)}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:600}
+
+/* calc */
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.fields label{font-size:12px;color:var(--gray);display:block;margin-bottom:4px}
+.fields input{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;font-family:inherit;font-size:15px;background:var(--white);color:var(--choco)}
+.out{background:var(--limesoft);border-radius:12px;padding:12px 14px;font-size:14.5px}
+
+/* tariffs */
+.tar{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;position:relative}
+.tar.hi{border-color:var(--olive);background:var(--limesoft)}
+.tar .badge{position:absolute;top:-10px;left:16px;background:var(--coral);color:#fff;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+.tar .nm{font-family:'Lora',serif;font-size:17px}
+.tar .pr{font-family:'Lora',serif;font-size:25px;margin:4px 0 8px}
+.tar .nt{font-size:13.5px;color:var(--gray);margin-bottom:10px}
+.tar ul{margin:0;padding-left:18px;font-size:14px}
+.tar ul li{margin-bottom:6px}
+
+/* дневник */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2px 0 16px}
+.hero div{background:var(--limesoft);border-radius:14px;padding:14px 12px;text-align:center}
+.hero .hn{font-family:'Lora',serif;font-size:27px;line-height:1.1;color:var(--olive)}
+.hero .hn.flat{color:var(--choco)}
+.hero .hs{font-size:11.5px;color:var(--gray);margin-top:5px;letter-spacing:.04em}
+.sechead{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin:18px 0 2px}
+.mini{font-size:12px;color:var(--gray)}
+.toggle{background:none;border:none;color:var(--olive);font-family:inherit;font-size:14px;padding:10px 0 0;cursor:pointer;text-decoration:underline}
+.pick{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:5px}
+.pick button{min-width:0;padding:11px 0;border-radius:10px;border:1px solid var(--line);background:var(--white);font-family:inherit;font-size:13.5px;color:var(--choco);cursor:pointer}
+.pick button.sel{background:var(--lime);border-color:var(--olive);font-weight:700}
+.fld{margin-bottom:13px}
+.fld label{font-size:12px;color:var(--gray);display:block;margin-bottom:5px}
+.fld input{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;font-family:inherit;font-size:15px;background:var(--white);color:var(--choco)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.stat:last-child{border-bottom:none}
+.stat span{color:var(--gray)}
+.stat b{font-family:'Lora',serif;font-size:19px;white-space:nowrap}
+.up{color:var(--coral)} .down{color:var(--olive)}
+.chart{display:block;width:100%;height:46px;margin:6px 0 2px}
+.chlbl{font-size:11.5px;color:var(--gray);display:flex;justify-content:space-between}
+.saved{font-size:13.5px;color:var(--olive);min-height:18px;margin-top:6px}
+
+/* видео */
+.vwrap{margin:14px 0 0}
+.vbox{position:relative;width:100%;max-width:250px;margin:0 auto;aspect-ratio:9/16;border-radius:16px;background:var(--choco);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;overflow:hidden}
+.vbox.playing{display:block}
+.vbox iframe{width:100%;height:100%;border:0;display:block}
+.vplay{width:54px;height:54px;border-radius:50%;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;padding-left:4px}
+.vtxt{color:#fff;font-size:13.5px;text-align:center;padding:0 18px;line-height:1.4;opacity:.92}
+
+/* bottom nav */
+.nav{position:fixed;bottom:0;left:0;right:0;max-width:var(--maxw);margin:0 auto;background:var(--white);border-top:1px solid var(--line);display:flex;z-index:30}
+.nav.locked{display:none}
+.wrap.locked{padding-bottom:30px}
+.codebox{display:flex;gap:8px;margin:12px 0 6px}
+.codebox input{flex:1;min-width:0;padding:14px;border:1px solid var(--line);border-radius:12px;font-family:inherit;font-size:17px;letter-spacing:.08em;text-align:center;background:var(--white);color:var(--choco)}
+.codebox button{flex:0 0 auto;padding:0 20px;border:none;border-radius:12px;background:var(--coral);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.codemsg{font-size:14px;margin-top:8px;min-height:20px}
+.codemsg.err{color:var(--coral)}
+.codemsg.ok{color:var(--olive)}
+.nav button{flex:1;border:none;background:none;padding:9px 2px 10px;font-family:inherit;font-size:10.5px;color:var(--gray);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav button.on{color:var(--coral)}
+.nav svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.foot{text-align:center;font-size:11.5px;color:var(--gray);padding:18px 20px 8px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="wrap locked" id="wrap">
+
+<div class="top">
+  <div class="brand">
+    <div class="logo">UNA<i>GE</i></div>
+    <div class="sub">Ключ · 28 дней</div>
+  </div>
+</div>
+
+<!-- ===== СЕГОДНЯ ===== -->
+<div class="screen" id="s1">
+  <div class="card" id="chatCard"></div>
+
+  <div class="daybar">
+    <button id="dPrev" onclick="setDay(state.day-1)">←</button>
+    <div class="daynum"><div class="n" id="dNum">День 1</div><div class="w" id="dWeek"></div></div>
+    <button id="dNext" onclick="setDay(state.day+1)">→</button>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow" id="taskKind">Задание дня</div>
+    <h2 id="taskTitle"></h2>
+    <p id="taskIntro"></p>
+    <ol class="steps" id="taskSteps"></ol>
+    <div id="taskVideo"></div>
+    <div class="why"><div class="eyebrow">Зачем это нужно</div><div id="taskWhy"></div></div>
+    <div class="q" id="taskQ"></div>
+    <button class="btn lime" style="margin-top:14px" id="doneBtn" onclick="toggleDone()">Сделала</button>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Прогресс</div>
+    <div class="grid" id="grid"></div>
+    <p style="font-size:13px;color:var(--gray);margin:12px 0 0" id="progText"></p>
+  </div>
+
+  <div class="card lime" id="routeCard">
+    <div class="eyebrow">Куда мы идём</div>
+    <h3>Маршрут одной капли жира</h3>
+    <p>Чтобы не заблудиться, весь курс построен как путь одной капли жира — от склада внутри клетки до выдоха. Каждая неделя это одна остановка.</p>
+    <p><b>Склад.</b> Капля лежит под белковой крышкой, и крышка сходит только когда падает инсулин. Падает он в паузах между едой. Первая неделя открывает склад.</p>
+    <p><b>Дорога.</b> Вышедший жир едет по крови, а вокруг лимфа, печень и отёк. Если дорога стоит, ты не увидишь результат, даже когда он есть. Вторая неделя чистит дорогу.</p>
+    <p><b>Тормоз.</b> Кортизол при сломанном ритме держит воду, гонит жир в живот и ломает сон, а невыспавшийся мозг вечером сам идёт на кухню. Третья неделя снимает тормоз.</p>
+    <p><b>Печка.</b> Жир входит в митохондрию через единственный турникет, и ей нужны мышцы и детали. Четвёртая неделя разжигает печку.</p>
+    <p>Сломана любая остановка — вес стоит, сколько бы ты ни ела меньше. Поэтому мы идём по всему маршруту, а не бьём в одну точку.</p>
+    <p>И худеть ты начинаешь с первого дня: ядро входит в первую неделю по одному действию в день, потому что каждое из них работает сразу на нескольких остановках.</p>
+    <p><b>Как устроены 28 дней.</b> Первые двенадцать вводят двенадцать действий — по одному в день. Это весь курс целиком, больше новых правил не появится. Дни с тринадцатого по двадцать восьмой — разборы: белок, еда вне дома, срывы, кофе и алкоголь, цикл и весы, плато, сон. Там мы не добавляем, а чиним то, что не держится.</p>
+    <button class="btn link" style="margin-bottom:0" onclick="hideRoute()">Поняла, не показывать</button>
+  </div>
+
+  <div class="card" id="chainCard" style="display:none">
+    <div class="eyebrow">Контрольная точка</div>
+    <h3 id="chainTtl">Какое звено сломано у тебя</h3>
+    <div id="chainMini"></div>
+    <p style="font-size:14.5px" id="chainText">Перепройди тест на 14-й и 28-й день — обычно к середине одно звено уходит из красной зоны в жёлтую, и это видно раньше, чем что-либо на весах.</p>
+    <button class="btn ghost" onclick="resetTest()">Перепройти тест</button>
+  </div>
+</div>
+
+<!-- ===== ТЕСТ · стартовый экран ===== -->
+<div class="screen on" id="stest">
+  <button class="back" id="testBack" style="display:none" onclick="go('s1')">← к курсу</button>
+  <div class="card flat">
+    <h1>Какое звено сломано у тебя</h1>
+    <p style="font-size:15px">Жир не сжигается силой воли. Он заперт. У жировой клетки четыре участника: <b>замок</b> — инсулин, <b>ключ</b> — адреналин, <b>тормоз</b> — кортизол, <b>печка</b> — митохондрия. Сломано любое звено — вес стоит, и у каждой женщины ломается своё.</p>
+    <p style="font-size:14.5px;color:var(--gray)">16 вопросов, три минуты. Отвечай быстро, первым, что пришло в голову: честность здесь важнее правильности. На выходе — твоя цепочка, разбор главного звена и первый шаг на завтра.</p>
+  </div>
+  <div id="gateLinks">
+    <button class="btn ghost" onclick="openOffer(null)">Пропустить тест и посмотреть курс</button>
+    <button class="btn link" onclick="toCode('stest')">У меня уже есть код доступа</button>
+  </div>
+  <div id="qlist"></div>
+  <button class="btn prim" onclick="calcTest()">Показать результат</button>
+  <div id="testOut"></div>
+
+</div>
+
+<!-- ===== КОД ДОСТУПА ===== -->
+<div class="screen" id="scode">
+  <button class="back" onclick="go(state.codeFrom||'stest')">← назад</button>
+  <div class="card flat">
+    <h1>Код доступа</h1>
+    <p style="font-size:15px">Остался один шаг. Введи код из письма — и откроется всё: 28 заданий, 16 уроков, практики, дневник и калькуляторы. Навсегда.</p>
+  </div>
+  <div id="codeBoxG"></div>
+  <button class="btn link" onclick="openOffer(null)">Я ещё не оплатила — к тарифам</button>
+</div>
+
+<!-- ===== ОФФЕР ===== -->
+<div class="screen" id="soffer">
+  <button class="back" onclick="go(state.offerFrom||'s1')">← назад</button>
+  <div id="offerBody"></div>
+</div>
+
+<!-- ===== ТЕОРИЯ ===== -->
+<div class="screen" id="s2">
+  <div class="card flat">
+    <h1>Теория</h1>
+    <p style="font-size:14.5px;color:var(--gray)">Шестнадцать уроков по четырём остановкам маршрута: склад, дорога, тормоз, печка. Простым языком, через образы — без заучивания названий.</p>
+    <p style="font-size:14.5px;color:var(--gray)">Уроки не привязаны к дням жёстко. Задание дня обязательное, урок — по возможности. Теория идёт следом за практикой: сначала делаешь, через пару дней читаешь, почему это работает.</p>
+  </div>
+  <div id="lessonList"></div>
+</div>
+
+<div class="screen" id="slesson">
+  <button class="back" onclick="go('s2')">← все уроки</button>
+  <div class="card flat">
+    <div class="eyebrow" id="lsWeek"></div>
+    <h1 id="lsTitle"></h1>
+  </div>
+  <div class="card" id="lsBody"></div>
+</div>
+
+<!-- ===== ПРАКТИКА ===== -->
+<div class="screen" id="s3">
+  <div class="card flat">
+    <h1>Практика</h1>
+    <p style="font-size:14.5px;color:var(--gray)">Двенадцать действий, которые остаются с тобой после курса. Это не диета, а конструкция дня — её можно вести годами, потому что в ней нет запретов.</p>
+  </div>
+  <div id="habitList"></div>
+
+  <div class="card">
+    <div class="eyebrow">Порядок дня</div>
+    <h3>Дренаж: сначала центр, потом периферия</h3>
+    <p style="font-size:14.5px">Главное правило, которое почти все нарушают: сначала открываем центральные пути, потом гоним жидкость с периферии. Иначе ты толкаешь воду в закрытую дверь.</p>
+    <table>
+      <tr><th>Что</th><th>Когда</th><th>Сколько</th></tr>
+      <tr><td>Диафрагмальное дыхание</td><td>Утро, лёжа</td><td>5 минут</td></tr>
+      <tr><td>Вакуум</td><td>Утром, натощак</td><td>8–10 по 10–15 секунд</td></tr>
+      <tr><td>Ходьба после еды</td><td>После каждого приёма</td><td>10–15 минут</td></tr>
+      <tr><td>Общая ходьба</td><td>В течение дня</td><td>7000–8000 шагов</td></tr>
+      <tr><td>Прохладная вода</td><td>Конец душа</td><td>30–60 секунд</td></tr>
+      <tr><td>Ноги вверх у стены</td><td>Вечер, за час до сна</td><td>5–7 минут</td></tr>
+    </table>
+    <div id="breathVideo"></div>
+    <div class="note"><b>Почему здесь нет сухой щётки.</b> Её советуют во всех статьях про лимфу, и меня про неё спрашивают каждый поток. Отвечаю честно: что щётка двигает лимфу, не показано. Приятная стимуляция кожи — да, дренаж — нет. Я не ставлю в протокол то, за что не могу ответить. Нравится ритуал — делай на здоровье, но считай его уходом за кожей, а не работой с отёком.
+<p style="margin:10px 0 0">И про холод сразу: минута прохладной воды даёт тонус и короткий сигнал «отпусти жир», но бурый жир всерьёз не включает — для этого нужны часы в прохладе. Работают здесь дыхание, мышцы и положение тела.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Чего не делаем</div>
+    <p style="margin-bottom:0;font-size:14.5px">Не гоним воду мочегонными. Настоящие диуретики вымывают калий и магний и бьют по сердцу, а травяные чаи просто гонят воду, не трогая причину — перестала пить, отёк вернулся.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Противопоказания и осторожность</div>
+    <ul class="plain" id="stopList" style="font-size:14.5px"></ul>
+  </div>
+</div>
+
+<!-- ===== ДНЕВНИК ===== -->
+<div class="screen" id="s4">
+  <div class="card flat">
+    <h1>Дневник</h1>
+    <p style="font-size:14.5px;color:var(--gray)">Дневник нужен не для дисциплины. Память переписывается задним числом: через три недели ты искренне не вспомнишь, какая была энергия в первый понедельник. А в цифрах видно.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Четыре касания вечером</div>
+    <div class="daybar" style="margin:4px 0 14px">
+      <button id="jPrev" onclick="setDay(state.day-1)">←</button>
+      <div class="daynum"><div class="n" id="dayTtl">День 1</div><div class="w" id="dayHint"></div></div>
+      <button id="jNext" onclick="setDay(state.day+1)">→</button>
+    </div>
+    <div id="jToday"></div>
+    <div class="fld"><label>Отёк лица утром — 0 нет, 3 лицо чужое</label><div class="pick" id="pOt"></div></div>
+    <div class="fld"><label>Энергия в 16:00 — 1 никакая, 5 отличная</label><div class="pick" id="pEn"></div></div>
+    <div class="fld"><label>Тяга к сладкому вечером — 1 нет, 5 накрыло</label><div class="pick" id="pTg"></div></div>
+    <div class="fld"><label>Сколько спала</label><div class="pick" id="pSl"></div></div>
+    <div class="saved" id="dayMsg"></div>
+    <p style="font-size:13px;color:var(--gray);margin:12px 0 0">Ничего сохранять не надо — записывается сразу. Нажми ещё раз, чтобы снять отметку. Стрелками можно вернуться назад и дозаполнить пропущенный день: записи встанут на свои даты.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Замеры</div>
+    <h3>Вес и сантиметры</h3>
+    <p style="font-size:14px;color:var(--gray)">Раз в неделю, одно и то же утро, натощак, после туалета. Остальные дни весы не трогаем.</p>
+    <div class="grid2">
+      <div class="fld"><label>Вес, кг</label><input id="mW" type="text" inputmode="decimal" autocomplete="off" placeholder="например, 61,2"></div>
+      <div class="fld"><label>Талия, см</label><input id="mT" type="text" inputmode="decimal" autocomplete="off"></div>
+      <div class="fld"><label>Живот, см</label><input id="mB" type="text" inputmode="decimal" autocomplete="off"></div>
+      <div class="fld"><label>Бёдра, см</label><input id="mH" type="text" inputmode="decimal" autocomplete="off"></div>
+    </div>
+    <div class="fld"><label>Рост, см — спрошу один раз</label><input id="mG" type="text" inputmode="numeric" autocomplete="off"></div>
+    <button class="btn lime" onclick="saveMeas()">Сохранить замер</button>
+    <div class="saved" id="measMsg"></div>
+  </div>
+
+  <div class="card" id="dynCard">
+    <div class="eyebrow">Что уже изменилось</div>
+    <div id="dynBody"></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Шкала отёка лица</div>
+    <p style="font-size:14px;color:var(--gray)">Смотри на себя утром, в первые десять минут после подъёма, при одном и том же свете. Это самый быстрый показатель из всех: он двигается за три-четыре дня, задолго до веса.</p>
+    <table id="scaleTbl"></table>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Что мерить и как</div>
+    <p style="font-size:14.5px"><b>Вес</b> — раз в неделю, не чаще. Одно и то же утро недели, сразу после туалета, до еды и воды, без одежды.</p>
+    <p style="font-size:14.5px"><b>Объёмы</b> — тем же утром, стоя расслабленно, на спокойном выдохе. Талия в самом узком месте, живот строго на уровне пупка, бёдра по самой выступающей точке. Ленту прижимать, но не врезать.</p>
+    <p style="font-size:14.5px;margin-bottom:0"><b>Ежедневно, четыре касания:</b> отёк лица 0–3, энергия в 16:00, вечерняя тяга и сколько спала. Это и есть те три показателя, которые двигаются раньше веса, плюс сон, от которого зависят все остальные.</p>
+    <div class="note">Главная цифра про весы: один грамм гликогена удерживает около трёх граммов воды, а в мышцах и печени его 300–500 граммов. Убрала углеводы — ушло полтора-два килограмма воды и ни грамма жира. Вернула — вернулось так же быстро. Плюс суточные колебания до двух килограммов и вторая фаза цикла. Поэтому весы здесь четвёртый по важности показатель: первые три — отёк лица, талия и энергия в 16:00.</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Анализы: на что смотрим</div>
+    <table id="labTbl"></table>
+    <div class="note">Референсный интервал — это диапазон, в который попадает большинство сдававших анализ в этой лаборатории. Не диапазон здоровья, а диапазон статистики. «Оптимум» — не другая норма, а ориентир: куда двигаться, если самочувствие не совпадает с бланком. Интерпретирует анализы врач.</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Красные флаги</div>
+    <p style="font-size:14.5px">Есть ситуации, в которых мы не продолжаем курс и не смотрим, «пройдёт ли само». Мы останавливаемся и идём к врачу.</p>
+    <ul class="plain" id="flagList" style="font-size:14.5px"></ul>
+    <p style="font-size:14px;color:var(--gray);margin-bottom:0">Ни один из этих пунктов не означает, что с тобой что-то ужасное. Означает одно: сейчас не время для дефицита и нагрузок. Сначала разберись, потом возвращайся — доступ остаётся.</p>
+  </div>
+</div>
+
+<!-- ===== ЕЩЁ ===== -->
+<div class="screen" id="s5">
+  <div class="card flat"><h1>Ещё</h1></div>
+
+  <div class="card">
+    <div class="eyebrow">Тест</div>
+    <h3>Перепройди на 14-й и 28-й день</h3>
+    <p style="font-size:14.5px">Обычно к середине одно звено уходит из красной зоны в жёлтую — и это видно раньше, чем что-либо на весах.</p>
+    <button class="btn lime" onclick="resetTest()">Пройти тест заново</button>
+  </div>
+
+  <div class="card" id="guarCard"></div>
+
+  <div class="card">
+    <div class="eyebrow">Частые вопросы</div>
+    <div id="faqList"></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Доступ</div>
+    <h3>Код вводится один раз</h3>
+    <p style="font-size:14.5px;margin-bottom:0">Приложение запомнило тебя: каждый день вводить код не нужно, просто открывай. Записи, замеры и отмеченные дни хранятся вместе с ним. Сменишь телефон — введёшь код из письма ещё раз, и всё продолжится.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Связь</div>
+    <p style="font-size:14.5px;margin-bottom:10px" id="chatNote"></p>
+    <a class="btn ghost" id="lnkAuthor" href="#" target="_blank" rel="noopener">Написать Татьяне</a>
+  </div>
+
+  <div class="foot" id="foot" onclick="secretTap()">UNAGE · Татьяна Весна<br>Курс «КЛЮЧ · 28 дней» · версия 8.0</div>
+</div>
+
+<div class="nav locked" id="nav">
+  <button class="on" data-s="s1" onclick="go('s1')"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Сегодня</button>
+  <button data-s="s2" onclick="go('s2')"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 015.5 4H11v16H5.5A1.5 1.5 0 014 18.5zM20 5.5A1.5 1.5 0 0018.5 4H13v16h5.5A1.5 1.5 0 0020 18.5z"/></svg>Теория</button>
+  <button data-s="s3" onclick="go('s3')"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg>Практика</button>
+  <button data-s="s4" onclick="go('s4')"><svg viewBox="0 0 24 24"><path d="M4 19V8M9.5 19V5M15 19v-7M20.5 19v-4"/></svg>Дневник</button>
+  <button data-s="s5" onclick="go('s5')"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg>Ещё</button>
+</div>
+
+</div>
+<script>
+// TASKS: [title, intro, [steps], why, eveningQuestion, videoId?]
+const TASKS=[
+["Точка А и три приёма",
+"Первые двенадцать дней мы вводим двенадцать действий — по одному в день. Это и есть весь курс: больше никаких новых правил не появится. Дальше мы будем разбирать, почему они не держатся, и чинить. Сегодня — первое и главное.",
+["Взвесься утром, натощак, после туалета. Замерь талию в самом узком месте, живот на уровне пупка, бёдра в самой широкой точке. Лента лежит, не врезается, живот не втягивай.",
+"Сделай два фото: анфас и профиль. Одно место, один свет, одно бельё.",
+"Занеси вес и замеры в «Дневник» — он посчитает динамику сам.",
+"И с сегодняшнего дня: три приёма пищи, ноль перекусов. Между ними вода, травяной чай, чёрный кофе без молока.",
+"Если ты на инсулине или на таблетках, которые сами снижают сахар, — не меняй режим до разговора с врачом."],
+"Представь склад внутри жировой клетки. Капля жира лежит там не голой — сверху белковая крышка. Пока она на месте, ферменты, которые умеют жир резать, до него просто не дотягиваются.\n\nКрышка сдвигается по одному сигналу: «можно тратить». Инсулин этот сигнал стирает, а поднимается он не на сладкое, а на любую еду вообще. Чай с молоком — волна. Три орешка — волна. Кусочек сыра к чаю — волна на пару часов.\n\nПоэтому при шести приёмах склад не открывается никогда: следующая волна приходит раньше, чем закончилась предыдущая. Те же калории в три приёма — три волны и три длинных промежутка. Жир выходит именно в промежутках.\n\nОтсюда первое правило: дело не только в том, сколько ты съела, а в том, сколько часов в сутки склад закрыт.",
+"Какой у тебя балл отёка и как прошёл день без перекусов?"],
+
+["Ночное окно",
+"Второе действие. Самая длинная пауза в сутках — ночная, и мы просто перестаём её укорачивать.",
+["Посчитай от ужина до завтрака: должно получиться 12–13 часов. Ужин в 19:00 — завтрак в 7:00–8:00.",
+"Кухня закрывается в 21:00. Совсем.",
+"Вечером можно воду и травяной чай.",
+"Окно не удлиняем до шестнадцати часов — и не потому, что «длинное голодание ломает щитовидку»: таких данных у женщин 40+ нет. Причина ниже."],
+"За ночь происходят сразу две вещи, и обе на разных остановках маршрута.\n\nПервая: инсулин опускается до базового, и крышка со склада сходит. Чем длиннее пауза, тем дольше она снята.\n\nВторая: включается внутренний датчик, который следит, хватает ли клетке энергии. Когда еда не приходит, он снимает блок с турникета, через который жир входит в печку, и заодно даёт команду строить новые печки. Ночное окно чинит и склад, и печку одновременно.\n\nА удлинять дальше смысла нет: чем короче окно для еды, тем легче недоесть. В два приёма почти никто не набирает ни белок, ни калий, а жёсткий недобор роняет активный гормон щитовидки и тянет вес в плато.",
+"Во сколько закрыла кухню?"],
+
+["Порядок в тарелке",
+"Третье действие. Ничего не убираем из еды — меняем только очерёдность.",
+["Сначала зелень и овощи. Хотя бы несколько ложек салата.",
+"Потом белок и жир: бобовые, рыба, яйца, орехи, масло.",
+"Углеводы в конце: крупа, картофель, хлеб, фрукт.",
+"В каждый приём, включая ужин в гостях и обед в столовой."],
+"Еда та же самая, меняется только очерёдность — и это один из немногих приёмов, который измеряли напрямую и много раз.\n\nЗелень, съеденная первой, создаёт в кишечнике рыхлую сетку. Углеводы, которые придут следом, будут просачиваться через неё медленно, а не вываливаться в кровь разом. Белок и жир добавляют второй тормоз: от них выходят гормоны сытости, которые притормаживают опорожнение желудка.\n\nПик сахара ниже — значит, и волна инсулина ниже. Крышка прижимается не так плотно и сходит раньше.\n\nА первым ты заметишь даже не это. Исчезнет послеобеденный провал: тот самый, когда через час после еды тяжелеет голова. Провал — это не усталость, это откат после слишком высокой волны.",
+"Изменилась ли тяжесть после еды и дневная сонливость?"],
+
+["Ходьба после еды",
+"Четвёртое действие. Не тренировка — прогулка. Но по влиянию на сахар она обходит час в зале.",
+["10–15 минут после каждого приёма пищи. Спокойным темпом, без спортивной формы.",
+"Считается всё: дойти до магазина, пройтись по двору, круг по офису, дела на ногах.",
+"Плохая погода — походи по квартире.",
+"И фоном за день — 7000–8000 шагов, необязательно подряд. Если работа сидячая, вставай каждый час хотя бы на три минуты."],
+"У мышцы есть собственная дверь для сахара, и открывается она от самого сокращения, без всякого инсулина. Это единственный способ убрать сахар из крови, не поднимая волну. Пятнадцать минут неспешной ходьбы после обеда делают для склада больше, чем час в зале натощак.\n\nВторое — насос. В венах ног есть клапаны, и каждое сокращение икры толкает кровь и лимфу вверх. Икра это второе сердце, и без её работы жидкость просто стоит внизу под собственным весом.\n\nТретье, и оно самое долгое. Регулярная фоновая нагрузка даёт клетке команду строить новые митохондрии. Печек становится больше — больше мест, где жир может сгореть. Разово сожжённые калории кончились вместе с прогулкой, а новые печки остались.",
+"Сколько раз получилось из трёх?"],
+
+["Свет: утро и вечер",
+"Пятое действие. Мы беремся за сон в первую неделю, а не в конце курса — и вот почему это принципиально.",
+["Утром: 10 минут на улице в первый час после пробуждения. Без солнечных очков, не через окно. Пасмурно — стой минут двадцать.",
+"Вечером: за полтора часа до сна выключи верхний свет, оставь тёплые лампы снизу.",
+"Телефон — на тёплый фильтр. Честнее отложить.",
+"Ложиться в одиннадцать через силу не надо. Тело само захочет спать раньше — обычно за четыре-пять дней."],
+"Сон — не отдых, а процедура. Одна короткая ночь измеримо роняет чувствительность к инсулину уже назавтра. Назавтра, не через месяц. То есть плохо поспала — и часть того, что ты сделала с едой, обнулилась.\n\nЧинить сон усилием воли бесполезно: его задают внутренние часы, а часы сверяются не по будильнику, а по свету. Яркий свет в глаза утром — сигнал «день начался», и вечерняя сонливость приходит раньше. Яркий свет вечером — сигнал «ещё день», и он двигает ту же стрелку обратно.\n\nПоэтому мы не заставляем себя ложиться раньше. Мы переводим часы, а тело подтягивается само.",
+"Получилось выйти на свет утром и приглушить его вечером?"],
+
+["Вода",
+"Шестое действие, и самое простое из всех. Но с ним связан парадокс, из-за которого половина женщин делает ровно наоборот.",
+["За день примерно 30 мл воды на килограмм веса. Точную цифру посчитает «Дневник» — она появится в итогах, как только внесёшь вес.",
+"Пей между приёмами пищи, а не во время еды.",
+"Первый стакан — сразу после пробуждения, 400–500 мл тёплой воды, до кофе и еды.",
+"Если снижена функция почек, есть сердечная недостаточность или ты принимаешь ингибиторы АПФ, сартаны или калийсберегающие мочегонные — объём обсуди с врачом."],
+"Звучит как парадокс: пьёшь мало — отекаешь сильнее. Но механика простая.\n\nКогда воды приходит мало, почка получает команду удерживать всё, что есть. В её трубочках открываются дополнительные водяные каналы, и жидкость идёт не наружу, а обратно в тело. Это режим засухи, и тело включает его на всякий случай.\n\nНачала пить стабильно — режим снимается за три-пять дней. Первые два дня отёк может даже вырасти, и это ожидаемо: тело ещё не поверило, что вода теперь приходит регулярно. Именно на этом месте большинство бросает и возвращается к «пью мало, чтобы не отекать».",
+"Сколько воды получилось за день?"],
+
+["Утро без тяжести",
+"Седьмое действие и последнее на этой неделе. Завтра — сверка: посмотрим, что уже сдвинулось.",
+["До обеда: фрукты, ягоды, зелень, овощи, каша на воде, смузи.",
+"Авокадо, орехи, семечки, масло, яйца, сыр — начиная с обеда.",
+"Если любишь зелёный сок — через 15–20 минут после утренней воды, а ещё через 15–20 минут завтрак. Сельдерей, огурец, зелень, немного яблока: подойдёт любой.",
+"Голодна к одиннадцати? Сначала увеличь объём завтрака. Если без жира утро всё равно не держится — добавь его и посмотри на свой вечер.",
+"Совсем без жира надолго не уходим: при длинных паузах желчь застаивается, а это путь к камням."],
+"Печень на маршруте — станция сортировки. Через неё проходит всё: жиры, лекарства, алкоголь и то, что тело выбрасывает наружу. Если станция загружена с утра до ночи, сортировка идёт медленнее, и это чувствуется тяжестью, а не болью.\n\nЛёгкое по жиру утро даёт ей несколько часов передышки в сутки. Это главная причина, и она простая.\n\nВторая причина не про печень, а про отёк: фрукты, зелень и овощи — это калий, клетчатка и вода. Жирный завтрак не даёт ничего из трёх.\n\nА версию «жир утром закрывает клетку» я подаю честно, как рамку для проверки: у людей это не показано. Эффект получают многочасовым вливанием жиров в вену, а не авокадо на тосте.",
+"Что было на завтрак и как дожила до обеда?"],
+
+["Дыхание диафрагмой",
+"Вторая неделя — про тело. Включаем насос, который у большинства выключен. И сразу разведу путаницу: диафрагмальное дыхание — это не «дыхание животом», как его обычно показывают.",
+["Ляг на спину, колени согни, стопы на полу. Положи ладони на нижние рёбра сбоку: пальцы вперёд, большие пальцы назад, будто обхватываешь себя за нижнюю часть грудной клетки.",
+"Вдох носом — рёбра расходятся в стороны и назад, ладони чувствуют, как грудная клетка становится шире. Плечи не поднимаются, грудь вверх не идёт, живот вперёд не выпячивается.",
+"Выдох длиннее вдоха, через чуть сжатые губы: рёбра сходятся, низ живота сам слегка подтягивается. Вдох на 4 счёта, выдох на 6.",
+"Пять минут утром, до того как встала. Закружилась голова — дыши мельче и реже.",
+"Главная ошибка: выталкивать живот вперёд, чтобы «рука поднималась». Это движение противоположно завтрашнему — и оно же каждый день выталкивает живот наружу."],
+"Диафрагма — это купол под лёгкими. На вдохе она опускается вниз и одновременно разводит нижние рёбра в стороны: объём растёт во все стороны, а не только вперёд.\n\nУ лимфы нет своего сердца. Её гонят три вещи: работа мышц, положение тела и перепады давления от диафрагмы. Каждый полный вдох подсасывает лимфу из живота вверх, в грудь, — работает как поршень в насосе.\n\nА если просто выталкивать живот вперёд, диафрагма почти не опускается. Давление уходит в мягкую переднюю стенку, поршня не получается, лимфа стоит. И живот от такой «тренировки» со временем только больше выходит вперёд.",
+"Получилось почувствовать, как расходятся рёбра под ладонями?",
+"h8ZUbggFDBg"],
+
+["Вакуум",
+"Вчера мы включили поршень. Сегодня — самое сильное, что можно сделать с животом изнутри: вакуум, он же уддияна бандха. Это не втягивание живота мышцами и не упражнение на пресс.",
+["Только на пустой желудок: утром до еды или через три часа после. На полный будет тошнить.",
+"Встань, ноги на ширине плеч, слегка наклонись вперёд и обопрись руками о бёдра.",
+"Сделай полный выдох — весь воздух до конца. Потом закрой горло, как будто сдерживаешь глоток, и не вдыхай.",
+"Сделай движение вдоха грудью, но воздух не впускай. Грудная клетка расширится, а живот сам уйдёт вверх и под рёбра — появится впадина. Не втягивай его мышцами.",
+"Держи 5–10 секунд. Расслабь живот, расслабь горло, спокойно вдохни. Три-четыре обычных вдоха — и повтори. Начни с пяти раз, дальше наращивай удержание: 8–10 раз по 10–15 секунд.",
+"Кому нельзя: беременность, первые дни цикла, гипертония и болезни сердца, любые грыжи, язва и обострения желудка, глаукома, недавние операции на животе. В этих случаях — мягкий вариант: лёжа, на выдохе подтяни низ живота внутрь и вверх, держи пять счётов, спокойно дыша. Десять раз."],
+"Вакуум поднимает диафрагму выше, чем любое дыхание: ты расширяешь грудную клетку, воздух войти не может, и внутри образуется разрежение. Живот уходит под рёбра сам, без единого мышечного усилия.\n\nЭто разрежение и есть вся суть. Лимфа из живота идёт вверх по главному протоку, и толкает её не насос, а перепад давления. Обычный вдох создаёт небольшой перепад, вакуум — самый сильный, какой ты можешь сделать без оборудования.\n\nВторое — фасция. Поднимаясь так высоко, диафрагма тянет за собой всю внутреннюю плёнку, которая держит органы, и тазовое дно поднимается вместе с ней, само, без единого сжатия. Клеткам этой плёнки важна не частота, а длительность натяжения.\n\nИ честно: вакуум не сжигает жир на животе. Точечного жиросжигания не существует. Он работает на дренаж и на тот живот, который выходит вперёд от выключенного корсета и застоявшейся лимфы.",
+"Получилось почувствовать впадину под рёбрами?",
+"j1m414uuYgs"],
+
+["Зелень, горечи и крестоцветные",
+"Десятое действие. Возвращаемся на станцию сортировки — теперь чтобы её накормить.",
+["Горькая зелень в день: руккола, цикорий, одуванчик, редис.",
+"И крестоцветные: брокколи, брюссельская, цветная, белокочанная капуста, ростки брокколи.",
+"Про способ: варёная брокколи даёт в разы меньше пользы — фермент, который образует нужное вещество, гибнет при варке. Сырое, бланшированное минуту-две или щепотка горчичного порошка к готовому.",
+"Клетчатка в каждый приём: зелень, овощи, бобовые, семена.",
+"При камнях в желчном пузыре горечи и артишок не добавляем. На варфарине зелень и капусту вводим постепенно и говорим врачу."],
+"Печень работает в две смены, и порядок важнее названий.\n\nПервая смена делает вещество химически активным, чтобы за него было чем ухватиться. На этом шаге оно становится едче, чем было. Вторая смена цепляет к нему ручку и выводит с желчью — и вот для неё нужны сера, глицин, магний и витамины группы B.\n\nОтсюда вывод, который редко говорят вслух: «разогнать детокс» в отрыве от второй смены — плохая идея. Прибавишь работы первой, а выносить будет некому. Мы кормим обе.\n\nГоречь на языке рефлекторно запускает отток желчи — самый прямой рычаг, который у тебя есть. А клетчатка нужна не для пищеварения: желчь выносит переработанное в кишечник, и если клетчатки мало, часть всасывается обратно. Дорога получается кольцевой, и ты возишь один груз по кругу.",
+"Что добавила в тарелку?"],
+
+["Вечер: ужин, ноги вверх, магний",
+"Одиннадцатое действие — весь вечер одним блоком. Он решает, как пройдёт ночь, а ночь решает, как пройдёт завтрашний день.",
+["Ужин за три часа до сна. Состав: овощи, белок и обязательно немного сложных углеводов или крахмалистого овоща. «Только салат» — плохая идея.",
+"После ужина — пять-семь минут ногами вверх у стены. Таз у стены, поясница лежит спокойно, колени можно слегка согнуть.",
+"Пока лежишь — то самое дыхание рёбрами: вдох в стороны, выдох длиннее вдоха.",
+"Магний за час до сна, глицинат или цитрат. При болезнях почек — только после врача.",
+"Если просыпаешься в три ночи, проверь сначала алкоголь, духоту, свет, приливы и храп с остановками дыхания."],
+"Три вещи в одном вечере, и каждая делает своё.\n\nУглеводы в ужине нужны не для того, чтобы «восполнить гликоген»: утренний подъём кортизола идёт по внутренним часам и случится у тебя после любого ужина. Они нужны проще — помогают заснуть и закрывают голод, чтобы ты не лежала в постели с мыслью о хлебе.\n\nНоги вверх — чистая механика. Днём жидкость стоит в голенях под собственным весом, к вечеру там её больше всего. Подняла ноги — столб исчез, отток пошёл сам. А дыхание добавляет насос сверху: получается правило «сначала центр, потом периферия» в одном упражнении.\n\nМагний — деталь, без которой не работает энергетическая монета тела: АТФ существует в клетке только в паре с ним. Плюс он нужен тормозным рецепторам в мозге, тем самым, что гасят возбуждение. А при хроническом стрессе магний быстрее уходит с мочой — и круг замыкается сам.",
+"Во сколько был ужин и что в нём было?"],
+
+["Силовая",
+"Двенадцатое, последнее действие курса. Больше новых правил не будет — дальше только разборы.",
+["20 минут, своим весом, два раза в неделю. Приседания — 3 подхода по 10–12. Выпады или зашагивания на ступеньку — 3 по 8 на каждую ногу. Отжимания от стены или от дивана — 3 по 8–10. Ягодичный мостик — 3 по 12. Планка — 3 по 20–30 секунд.",
+"Между подходами отдых 40–60 секунд.",
+"Больно в спине или коленях — уменьши амплитуду, приседай к стулу, планку делай с колен.",
+"Второй раз — через два-три дня. Мышечная боль назавтра нормально, резкая боль в суставе — нет."],
+"Печки живут в клетках, и больше всего их в мышцах. Поэтому мышца — это не про рельеф, а про размер топки: чем её больше, тем больше мест, где жир может сгореть, и тем ниже инсулин в покое.\n\nОбратное тоже верно, и об этом редко предупреждают. Женщина, которая худеет только за счёт еды и ходьбы, теряет вес вместе с мышцей — а значит, и часть топки. Вес ушёл, а сжигать стало негде. Поэтому он возвращается легче, чем уходил, и тело выглядит дряблым при тех же цифрах на весах.\n\nДва раза в неделю — не произвольная цифра, а минимум, при котором мышца получает сигнал «ты нужна». Тело слышит его буквально так.",
+"Что оказалось тяжелее всего?"],
+
+["Белок: сколько и откуда",
+"Все двенадцать действий введены. Дальше — разборы: берём то, что ты уже делаешь, и чиним там, где не держится. Начнём с самого частого провала на растительной базе.",
+["Ориентир: примерно 1,2–1,5 грамма белка на килограмм веса. При весе 65 кг это 80–95 граммов в день, по 25–30 в каждый приём.",
+"Что это в тарелке: чечевица или нут 150 г в готовом виде — около 12 г белка. Тофу 150 г — около 18. Темпе 100 г — около 19. Киноа 150 г готовой — около 7. Горсть тыквенных семечек — около 8. Яйцо — 6. Рыба 120 г — около 25.",
+"Собери любой свой обед и ужин так, чтобы белковая часть была видна глазом: не ложка нута в салате, а полноценная порция.",
+"Добавь на неделю одно новое белковое блюдо, которое не надо готовить каждый день: паштет из чечевицы, хумус, запечённый тофу."],
+"Белок — единственное место в курсе, где «недобрать» опаснее, чем «перебрать».\n\nКогда тело снижает вес, оно разбирает не только жир. При нехватке белка оно спокойно берёт аминокислоты из мышцы — она для него расходный склад. А мышца, как мы помним, и есть топка. Получается: вес уходит, топка уменьшается, инсулин в покое растёт, и после курса всё возвращается быстрее, чем уходило.\n\nВторое: белок — самая сытная часть тарелки. Он запускает гормоны сытости, которые держат тебя до следующего приёма. Женщина, которая «ест правильно» и всё равно идёт на кухню в девять вечера, чаще всего просто недобрала белка в обед.\n\nНа растительной базе это требует внимания, потому что в бобовых и крупах белка меньше на объём, чем кажется. Отсюда правило: белковая часть должна быть видна глазом в каждой тарелке.",
+"Сколько примерно белка вышло сегодня?"],
+
+["Сверка второй недели",
+"Две недели позади. Смотрим цифры и чиним то, что просело.",
+["Вес, талия, живот, бёдра — в «Дневник».",
+"Посмотри в итогах, что сдвинулось сильнее: отёк, энергия или тяга.",
+"Теперь честно по двенадцати действиям: какие три держатся сами, а какие ты вспоминаешь через раз?",
+"Выбери из провалившихся одно — самое лёгкое. Не самое важное, а самое лёгкое. Его и чиним на этой неделе."],
+"К этому дню обычно уходит отёчный объём: кольцо надевается утром, джинсы застёгиваются иначе. Часть этого — вода, и я говорю прямо. Но без снятия отёка ты бы не увидела жировой результат под ним.\n\nА теперь про то, почему мы берём самое лёгкое, а не самое важное. Привычка закрепляется не силой воли, а зацепкой: действие держится, если оно привязано к тому, что ты и так делаешь каждый день. Вода после пробуждения, ходьба после еды, свет в первый час — у них есть якорь. То, что висит в воздухе, отваливается первым, каким бы важным оно ни было.\n\nПоэтому чиним не самое нужное, а самое цепляемое. Одно закрепилось — следующее пойдёт легче.",
+"Какие три действия держатся сами, а какое ты выбрала чинить?"],
+
+["Еда вне дома",
+"Разбор. Ритм ломается не дома, а в кафе, в гостях и на работе — там, где выбирают не вы.",
+["В кафе: начни с салата или овощей, они почти везде есть. Потом горячее. Хлеб из корзинки — в конце или никогда.",
+"Попроси заправку отдельно и соус отдельно. Это не каприз, это самый большой скрытый сахар в тарелке.",
+"В гостях: ешь то, что дают, но в том же порядке. Зелень, белок, углеводы. Один бокал — после еды, а не до.",
+"На работе: держи в ящике то, что спасает ритм, — орехи, хумус, консервированный нут, фрукт. Это не перекус, это часть нормального приёма, если обед сорвался.",
+"И главное правило: один ужин в гостях не ломает ничего. Ломает то, что начинается назавтра."],
+"Курс устроен так, что в нём нет запрещённых продуктов, и это не мягкость, а расчёт. Запрет повышает ценность запрещённого: чем строже список, тем выше шанс, что на четвёртой неделе женщина съест всё сразу и бросит.\n\nПоэтому вне дома мы держим не состав, а порядок. Зелень первой, углеводы последними — это работает в любой тарелке, включая ту, которую ты не выбирала. Пик сахара будет ниже, даже если еда не идеальная.\n\nИ второе, что стоит знать про алкоголь в гостях. Печень бросает все дела и занимается им в первую очередь: всё остальное, включая жир, встаёт в очередь. Один бокал это не катастрофа, но съеденное вместе с ним обрабатывается медленнее.",
+"Что из этого получится применить ближайшими выходными?"],
+
+["Срыв: что делать назавтра",
+"Разбор. Срыв будет — у всех и всегда. Разница между теми, кто доходит до конца, и теми, кто бросает, не в срывах, а в том, что происходит на следующий день.",
+["Если накрыло сегодня: сегодня же ничего не исправляем. Ни голодовки вечером, ни «отработаю завтра в зале».",
+"Назавтра — обычный день. Обычный завтрак в обычное время, обычный обед, обычный ужин. Ничего не урезаем.",
+"Не взвешивайся на следующее утро. Цифра будет выше на килограмм-полтора, и это вода и содержимое кишечника, а не жир.",
+"Запиши одной строкой, что было в дне перед срывом: сколько спала, что было на обед, была ли в дне хоть одна радость.",
+"Формула, которую стоит выучить: это был один приём пищи. Не неделя и не месяц. Следующий приём — обычный."],
+"Самое вредное в срыве — не съеденное, а то, что начинается после.\n\nЖенщина урезает еду назавтра, чтобы «компенсировать». Днём получается мало настоящей еды — и к вечеру тело добирает своё, снова быстрым. Так один вечер превращается в неделю, и уже не срыв виноват, а попытка его исправить.\n\nВторое — самобичевание. Оно поднимает кортизол, а кортизол прямо усиливает тягу к калорийному и заставляет печень делать глюкозу из ничего. То есть ругая себя за съеденное, ты буквально закрываешь себе склад ещё на несколько часов.\n\nПосчитаем честно. Одна тысяча лишних калорий — это примерно сто граммов жира. Не килограмм, который покажут весы наутро: то вода и содержимое кишечника, и оно уйдёт за два-три дня само. А вот неделя «исправления» стоит дороже, чем сам срыв.",
+"Что было в твоём дне перед последним срывом?"],
+
+["Разбор своего вечера",
+"Разбор. Сегодня не добавляем ничего — сегодня смотрим. Это важнее любого действия на этой неделе.",
+["Вспомни последний вечер, когда накрыло.",
+"Ответь себе на четыре вопроса: сколько ты спала накануне? Что было на обед — полноценная еда или «салатик»? Было ли в дне хоть что-то приятное, кроме еды? Во сколько ты ела последний раз до срыва?",
+"Запиши ответы. Один из них почти наверняка и окажется причиной.",
+"И посмотри в «Дневнике» на график тяги: совпадают ли пики с днями, где сон был меньше шести часов."],
+"К девяти вечера на тебя сходятся четыре вещи разом.\n\nПервая: если днём было мало настоящей еды, тело добирает — и добирает быстрым, потому что ему нужно сейчас, а не правильно.\n\nВторая: самоконтроль за день израсходован. Он дорого стоит, и к вечеру решения принимает не разум, а более древний отдел, который про удовольствие и выживание.\n\nТретья: если в дне не было ни одной радости, мозг придёт за ней на кухню. Еда — самый дешёвый способ поднять дофамин. Это проблема пустого дня, а не еды.\n\nЧетвёртая: при сломанном ритме вечером кортизол повышен, а он прямо усиливает тягу к калорийному.\n\nОтсюда вывод, который меняет всё: срыв в девять вечера готовится с семи утра. Разбирать надо не сам срыв, а день перед ним.",
+"Что нашла у себя?"],
+
+["Тяга: правило двадцати минут",
+"Разбор. Вчера ты посмотрела на свой день. Сегодня — инструмент на момент, когда накрывает прямо сейчас.",
+["Когда накрыло: сначала стакан воды, потом что-то реальное — фрукт, орехи, овощи, — потом подожди двадцать минут.",
+"Метаболическая тяга за двадцать минут уходит. Осталась — значит, она эмоциональная, и еда её не закроет.",
+"Сладкое не запрещай: перенеси его на после еды и на первую половину дня.",
+"И проверь обед. Девять из десяти вечерних тяг начинаются с обеда, в котором не было белка."],
+"Начнём с того, что снимает вину.\n\nЖировая ткань сама производит гормон сытости: чем её больше, тем больше сигнала. У женщины с лишним весом его много. Очень много. Но мозг этот сигнал не слышит — воспаление обрывает передачу на первой же ступени внутри нейрона. Рецептор сигнал принял, а дальше по цепочке он не пошёл.\n\nМозг делает единственный доступный вывод: запасов нет. И ведёт себя как при голоде — поднимает аппетит, снижает расход, требует калорийное. Женщина в этот момент смотрит в зеркало и видит прямо противоположное.\n\nПочинить этот сигнал едой пока не умеет никто, и я не стану обещать. Что работает: меньше воспаления, нормальный сон и неспешный темп снижения веса. Чем резче падает сигнал, тем сильнее мозг давит обратно — поэтому быстрые диеты заканчиваются срывом, а не слабостью характера.",
+"Сработало ли правило двадцати минут?"],
+
+["Кофе, алкоголь и вечер",
+"Разбор. Два напитка, про которые спрашивают чаще всего — и оба влияют не на вес напрямую, а на сон. А сон влияет на всё остальное.",
+["Кофе — до двух чашек и только до полудня. Не из строгости: период полувыведения кофеина около пяти часов, и выпитый в четыре часа дня он на четверть ещё в крови в полночь.",
+"Кофе с молоком — это приём пищи, а не напиток: молочный белок поднимает инсулин. В промежутках между едой только чёрный.",
+"Первую чашку — не раньше чем через час после пробуждения. Сразу после подъёма кортизол и так на пике, кофеин поверх него даёт дрожь и провал к одиннадцати.",
+"Алкоголь: один бокал, после еды, не чаще двух раз в неделю, и не в те дни, когда плохо спала.",
+"Если выбираешь — сухое вино лучше сладкого и коктейлей, и лучше с едой, чем натощак."],
+"Кофеин не бодрит. Он блокирует вещество, которое накапливается в мозге за день и создаёт чувство усталости. Усталость при этом никуда не девается — она просто перестаёт ощущаться и наваливается позже, вся сразу.\n\nПоэтому поздняя чашка не «не мешает спать». Она делает сон мельче: ты засыпаешь, но фаза глубокого сна короче, а именно в ней восстанавливается чувствительность к инсулину.\n\nС алкоголем похожая подмена. Он помогает заснуть и ломает вторую половину ночи: примерно через четыре часа после бокала организм отрабатывает продукты распада, и ты просыпаешься в три. Это самая частая причина того самого ночного пробуждения, на которое женщины грешат на сахар.\n\nИ отдельно про печень. Она занимается алкоголем в первую очередь, бросая всё остальное. Жир в этот момент стоит в очереди.",
+"Во сколько была последняя чашка кофе?"],
+
+["Что убрать по показаниям",
+"Разбор. Мы дошли до списка запретов только сейчас — и это не случайность.",
+["Есть вздутие, слизь по утрам, отёчное лицо, проблемы с кожей? Убери молочное на две недели.",
+"Вздувает после хлеба, тяжёлая голова по утрам? Попробуй две недели без глютена.",
+"Нет этих признаков — не убирай ничего.",
+"Через две недели верни продукт на один день и понаблюдай сутки-двое. Это и есть твой ответ.",
+"По одному продукту за раз. Убрала два сразу — и не узнаешь, который был виноват."],
+"Ритм важнее состава. Если инсулиновые волны идут весь день, убирать хлеб бессмысленно: склад всё равно закрыт. Поэтому сначала мы поставили ритм, и только теперь смотрим на продукты.\n\nПро молочное скажу честно, потому что в сети про него много лишнего. Оно действительно даёт инсулиновый ответ выше, чем можно ожидать по углеводам, но дело не в лактозе — у неё низкий гликемический индекс, — а в сывороточном белке. И сам по себе этот ответ не повод его убирать: в больших наблюдениях молочные продукты не связаны ни с набором веса, ни с диабетом.\n\nНет признаков — не убираем ничего, и это принципиально. Безглютеновая жизнь без показаний обедняет рацион, а обеднённый рацион — это меньше калия, меньше клетчатки и меньше деталей для печки. Ты вычтешь из себя больше, чем прибавишь.",
+"Что решила проверить на себе?"],
+
+["Сверка третьей недели",
+"Три недели позади. Сегодня честное сравнение — и смотреть надо не только на цифры.",
+["Замеры: вес, талия, живот, бёдра — в «Дневник».",
+"Фото анфас и профиль в тех же условиях, что в первый день.",
+"Открой фото первого дня и положи рядом. Смотри на овал лица, линию талии, осанку.",
+"И перепройди тест: посмотри, как изменилась цепочка."],
+"Смотри на фото, а не только на весы. Зеркало ты видишь каждый день и к себе привыкаешь — поэтому изменения первыми замечают все, кроме тебя. Фотография не привыкает.\n\nИ посмотри на соотношение: сколько ушло килограммов и сколько сантиметров. Если сантиметры уходят быстрее веса — это лучший из возможных сценариев, и в «Дневнике» он подписан прямо под цифрами.\n\nК этому дню у большинства уходит из красной зоны одно звено цепочки. Не обязательно то, с которого начинали: чаще всего первым светлеет тормоз, потому что сон и свет мы поставили на первой неделе.",
+"Что видишь на сравнении с первым днём?"],
+
+["Заготовки: чтобы ритм держался",
+"Разбор. Четвёртая неделя — про то, как всё это переживёт обычную жизнь. Начнём с кухни, потому что именно там ритм ломается первым.",
+["Выдели полтора часа в выходной. Не на готовку блюд, а на заготовки.",
+"Отвари большую кастрюлю чечевицы или нута, запеки противень овощей, свари крупу. Это база для четырёх-пяти обедов.",
+"Вымой и нарежь зелень, сложи в контейнер с бумажным полотенцем — так она живёт неделю и попадает в тарелку первой.",
+"Собери «аварийный набор» на случай пустого холодильника: консервированный нут, замороженные овощи, тофу, орехи, крупа быстрой варки.",
+"И правило закупки: если чего-то нет дома, ты это не съешь. Весь выбор делается один раз в магазине, а не двадцать раз у холодильника."],
+"Воля — ресурс, который тратится за день и к вечеру кончается. Это не метафора: каждое решение стоит дорого, и к девяти вечера решения принимает уже не разум.\n\nПоэтому единственный надёжный способ удержать ритм — не принимать этих решений вовсе. Нарезанная зелень в контейнере и готовая чечевица в холодильнике убирают выбор: ты не решаешь, что съесть, ты просто достаёшь.\n\nЭто же объясняет, почему большинство диет разваливается на третьей неделе. Не потому, что «не хватило мотивации», а потому что каждый приём пищи требовал решения, и этих решений за три недели накопилось больше сотни.\n\nЗаготовки — единственное действие в курсе, которое делается не с телом, а с кухней. И по возврату оно одно из самых выгодных.",
+"Что из этого реально сделаешь в выходные?"],
+
+["Чем кормить печку",
+"Разбор. Мы увеличили топку силовой. Теперь проверим, есть ли в ней инструменты — без них печка горит вполсилы при любом питании.",
+["Один бразильский орех в день, не больше: содержание селена в них скачет в разы. И не совмещай с мультивитамином, где селен уже есть.",
+"Железо: зелень, бобовые, гречка — обязательно вместе с витамином С: лимон, болгарский перец, петрушка.",
+"Магний и витамины группы B: зелень, тыквенные семечки, какао, гречка, грибы.",
+"Если сдавала анализы — посмотри ферритин. Ниже 30 это латентный дефицит.",
+"Железо в таблетках «на всякий случай» не пьём: только по анализу и с врачом."],
+"Печка — это конвейер, и на каждом шаге стоит рабочий с инструментом. Инструменты — железо, медь, витамины группы B, магний. Нет инструмента — шаг идёт вполсилы, и никакое питание этого не компенсирует.\n\nЖелезо здесь главное: оно входит в переносчики, по которым идёт электронная эстафета внутри митохондрии. У женщины 35–60 с циклом запас низкий очень часто, и тогда картина узнаваемая: зябкость, одышка на лестнице, волосы на расчёске. Волосяной фолликул — один из самых прожорливых органов, и при нехватке ресурса тело выключает его первым.\n\nОтдельно щитовидка. Её гормон задаёт, сколько печек будет в клетке и как быстро они работают, а фермент, который переводит его в активную форму, работает только с селеном.\n\nИ честно: худеть дефицит железа тебе не запретит. Но украдёт ровно то, на чём держится весь курс, — силы и желание двигаться.",
+"Что было в тарелке из этого списка?"],
+
+["Цикл и весы",
+"Разбор. Один из главных источников паники — и он не имеет отношения к жиру.",
+["Отмечай в «Дневнике» день цикла, хотя бы примерно, — просто помни его, когда смотришь на весы.",
+"За неделю до менструации вес может быть выше на 1–2 кг. Это вода, она уйдёт сама за два-три дня после начала.",
+"Не взвешивайся во второй фазе цикла и не сравнивай её с первой. Сравнивай одну и ту же фазу с такой же в прошлом месяце.",
+"В эти дни чаще тянет на сладкое — это не слабость, это сдвиг гормонального фона. Добавь белок в обед и сложные углеводы в ужин, станет заметно легче."],
+"Во второй половине цикла поднимается прогестерон, а вместе с ним гормон, который заставляет почку удерживать натрий. Натрий тянет воду — отсюда отёкшие пальцы, тяжёлые ноги и плюс полтора килограмма на весах.\n\nЖир при этом не прибавился. Прибавилась вода, и ровно столько же уйдёт после начала менструации.\n\nЗнать это важно не ради спокойствия, а ради решений. Женщина видит плюс два, решает, что «всё зря», режет еду — и попадает в тот самый круг, где дефицит добавляет кортизол, кортизол добавляет воду, и вес стоит ещё неделю. То есть паника наносит вред, которого не наносила сама вода.\n\nЕсть и приятная часть: в первой фазе цикла вес обычно уходит легче и быстрее. Это не твоя заслуга и не твоя вина — просто фон.",
+"В какой фазе цикла ты сейчас и что показывают весы?"],
+
+["Если вес встал",
+"Разбор. Плато на третьей-четвёртой неделе — не сбой, а самая ожидаемая часть процесса. Определим твой сценарий: лечатся они по-разному, а чаще всего не лечатся вовсе.",
+["Сценарий первый. Мёрзнешь сильнее обычного, энергия просела, тяга выросла, двигаться лень. Это адаптация. Лечится не урезанием, а одним-двумя днями с нормальными углеводами.",
+"Сценарий второй. Весы стоят намертво, а талия уходит и одежда садится иначе. Не делай ничего и не взвешивайся две недели.",
+"Сценарий третий. Вес прыгнул за сутки-двое, лицо припухло, кольцо жмёт, рацион не менялся. Это вода: стресс, соль, вторая фаза цикла или начало силовых. Уйдёт сама за три-семь дней.",
+"И правило одного параметра: меняешь что-то одно и ждёшь десять дней. Поменяла три — потом не узнаешь, что сработало."],
+"Почему тело вообще тормозит — стоит понять один раз.\n\nЖировая ткань отправляет в мозг отчёт: «запасы на месте». Когда запасы уменьшаются, отчёт становится тише, и мозг читает это как угрозу. Он снижает расход, поднимает голод и убавляет спонтанную активность: ты начинаешь меньше ходить и больше сидеть, сама того не замечая.\n\nЭто не поломка, а защита, и работает она тем сильнее, чем резче ты худеешь. Поэтому урезать еду в ответ на плато — худшее, что можно сделать: тело просто затормозит ещё.\n\nДень с нормальными углеводами делает отчёт громче, расход возвращается. И вес часто идёт вниз через три-четыре дня после такого дня, а не во время него — так что не пугайся цифры наутро.",
+"Какой сценарий твой?"],
+
+["Если не спится",
+"Разбор. Свет мы поставили на пятый день, вечер собрали на одиннадцатый. Теперь — что делать, если сон всё равно не идёт.",
+["Сначала проверь очевидное: температура в спальне 18–20 градусов, темно, телефон не в кровати, последний кофе до полудня, алкоголя вечером нет.",
+"Если не засыпаешь дольше двадцати минут — встань. Лежать и уговаривать себя заснуть бесполезно: кровать перестаёт быть сигналом сна. Выйди в другую комнату при тусклом свете, вернись, когда начнёт клонить.",
+"Просыпаешься в три и не спишь — не смотри на часы и не бери телефон. Дыхание 4–6, выдох длиннее вдоха, пять минут.",
+"Вставай в одно и то же время, даже после плохой ночи. Подъём держит часы сильнее, чем отбой.",
+"Не отсыпайся днём дольше двадцати минут и не позже трёх часов дня."],
+"Сон — не то, что можно сделать усилием. Это то, что происходит, когда тело перестаёт получать сигналы бодрствования.\n\nЗа день в мозге копится вещество, которое создаёт давление сна: чем дольше ты не спишь и чем больше двигаешься, тем оно выше. К ночи давление должно столкнуться с упавшим кортизолом и поднявшимся мелатонином — и тогда ты засыпаешь.\n\nЛомается это тремя способами. Дневной сон сбрасывает накопленное давление. Кофеин блокирует само ощущение давления. А свет и тревога держат кортизол высоким, когда он должен падать.\n\nПоэтому «я просто не могу уснуть» почти всегда означает одно из трёх, а не бессонницу как диагноз. И поэтому подъём в одно время работает лучше раннего отбоя: он задаёт точку отсчёта для всей суточной кривой.\n\nЕсли же ты храпишь с остановками дыхания, просыпаешься разбитой после восьми часов и засыпаешь днём на ходу — это не гигиена сна, это к врачу. Апноэ не лечится режимом.",
+"Что из списка оказалось твоим?"],
+
+["Двенадцать действий",
+"Предпоследний день. Собираем систему, которая останется с тобой без приложения.",
+["Открой «Практику» и выпиши двенадцать действий от руки.",
+"Повесь на холодильник или на зеркало.",
+"Отметь три, которые дались тяжелее всего — за ними придётся следить дольше.",
+"И правило 80/20 на будущее: пять дней база, два — жизнь. Это не послабление, а условие того, что система переживёт год, а не месяц."],
+"То, что осталось в приложении, забывается через неделю после окончания курса. То, что висит на холодильнике, работает месяцами.\n\nДело не в дисциплине, а в том, как устроено внимание: оно не ищет задачи само, оно откликается на то, что попало в поле зрения. Список на виду — это уже половина выполнения.\n\nИ выпиши от руки, а не копируй. Рука пишет медленнее, чем бежит взгляд, и за эти секунды ты успеваешь решить, что из списка действительно твоё, а что ты вписала «для порядка».\n\nПро 80/20 отдельно. Тело без хронического воспаления и с восстановленной метаболической гибкостью спокойно переваривает два свободных дня в неделю. Метаболическая гибкость — способность легко переключаться между глюкозой и жиром как топливом — и есть настоящая цель этого месяца.",
+"Какие три оказались самыми трудными?"],
+
+["Финал",
+"Двадцать восемь дней. Посмотрим весь маршрут целиком — и последнюю остановку, про которую почти никто не знает.",
+["Замеры: вес, талия, живот, бёдра — в «Дневник».",
+"Фото в тех же условиях, что в первый и в двадцать первый день.",
+"Открой итоги и посмотри, что изменилось от первой недели к четвёртой.",
+"Перепройди тест и сравни цепочку с первым результатом.",
+"Если сдавала анализы на старте — пересдай инсулин и глюкозу через неделю-две."],
+"Капля жира, за которой мы шли всё это время, прошла весь путь. Крышка на складе снялась, потому что инсулин перестал держать её круглосуточно. Сигнал «отпусти» пришёл — от пауз, ходьбы, прохлады и нормального сна. Дорога оказалась проходимой: лимфа пошла, печень разгрузилась. Печка разгорелась: топка стала больше, инструменты нашлись.\n\nИ остался последний шаг. Углерод жирной кислоты покидает тело в основном с выдохом, в виде углекислого газа, и частично с водой. Не с потом и не «сгорая в пламени». Ты буквально выдыхаешь свой жир.\n\nВот и весь маршрут: склад, ключ, дорога, печка, выдох. Сломана любая остановка — вес стоит, сколько бы ты ни ела меньше.\n\nРеалистичный результат — минус два-пять килограммов, из которых первые один-три были водой. Но главное не в этом. Ты знаешь, на какой остановке маршрут ломается лично у тебя, и знаешь, чем его чинить. Это то, что остаётся, когда заканчивается любой курс.",
+"Что изменилось за 28 дней, кроме веса?"]
+];
+// LESSONS: [week, number, title, bodyHTML, deepHTML]
+const LESSONS=[
+["Неделя 1 · Старт","1.1","Почему жир заперт",
+`<p>Представь жировую клетку. Внутри неё капля жира, и лежит она не голой: сверху белковая оболочка. Рядом ждут два фермента, которые умеют эту каплю разрезать. Но пока оболочка цела, они к ней не подходят.</p>
+<p>Снять оболочку может команда от нервной системы — адреналин и норадреналин. Это главный <b>ключ</b>. Но он не единственный, и второй вход очень кстати именно для нас: сердце при нагрузке выделяет свои гормоны, и они идут другим путём, а нажимают на те же самые кнопки на оболочке капли. Поэтому движение открывает клетку даже тогда, когда адреналиновый канал работает плохо — а у женщин он часто работает плохо именно на бёдрах.</p>
+<p>А инсулин работает ровно наоборот: он разрушает вещество-посредник, через которое команда передаётся. Пока инсулин высокий, жир из клетки почти не выходит: то, что вышло, тут же возвращается назад и снова становится запасом. Не «медленно горит» — крутится на месте.</p>
+<p>Отсюда вся логика курса. Мы не заставляем тело тратить больше. Мы даём инсулину упасть — и оболочка снимается сама.</p>
+<p>Дальше в цепочке ещё два звена. <b>Тормоз</b> — кортизол: он держит воду, гонит жир в живот и тормозит щитовидку. <b>Печка</b> — митохондрия: место, где вышедший жир сгорает. Сломано любое звено — вес стоит.</p>`,
+`<p>Капля жира внутри адипоцита покрыта белковой оболочкой из <b>перилипина-1</b>. Рядом ждут <b>ATGL</b> (делает первый надрез) и <b>гормон-чувствительная липаза HSL</b>. Пока перилипин цел, они к жиру не подходят.</p>
+<p>Ключ — <b>циклический АМФ</b>. Адреналин → β-адренорецептор → аденилатциклаза делает цАМФ → активируется протеинкиназа А → фосфорилирует перилипин, тот отпускает <b>CGI-58</b>, который включает ATGL; параллельно PKA фосфорилирует HSL, и та переезжает на каплю.</p>
+<p>Второй вход, важный именно у человека: <b>ANP/BNP → NPR-A</b> (сам является гуанилатциклазой) → <b>цГМФ → PKG</b> → те же сайты на перилипине-1 и HSL. У людей и приматов работает сильно, у грызунов почти нет — поэтому в мышиной литературе его не видно.</p>
+<p>Инсулин выключает ключ: через PI3K–Akt активирует <b>фосфодиэстеразу-3B</b>, а та разрушает цАМФ. Базальный липолиз при этом не нулевой — вышедшие жирные кислоты реэтерифицируются обратно в триглицерид.</p>
+<p>Вход длинноцепочечных жирных кислот в митохондрию один: <b>CPT1</b> и карнитиновый челнок. Блокируется <b>малонил-КоА</b>, открывается через <b>AMPK</b>. Коротко- и среднецепочечные проходят мимо CPT1 — отсюда интерес к МСТ-маслу.</p>`],
+
+["Неделя 1 · Старт","1.2","Сон — это метаболическая процедура",
+`<p>Одна ночь короткого сна — и назавтра чувствительность к инсулину измеримо падает. Не через месяц. Назавтра.</p>
+<p>Грелин растёт, лептин падает, тяга смещается конкретно к быстрым углеводам, растёт активность миндалины и падает контроль префронтальной коры — решение «съесть» принимается раньше, чем включается разум.</p>
+<p>Это не слабость. Это нейробиология невыспавшегося мозга. Женщина, которая спит пять часов и винит себя за вечерние конфеты, борется со стволом собственного мозга. Она проиграет — и правильно сделает.</p>
+<p><b>Про пробуждение в три-четыре ночи.</b> Самый частый ответ — самый скучный: это нормальная точка в архитектуре сна, на которую накладывается утренний подъём кортизола, а он как раз около трёх и начинается. Сверху ложатся реальные причины: алкоголь вечером, приливы в перименопаузе, апноэ сна, свет, полный мочевой пузырь, тревога.</p>
+<p>Версию «упал сахар — выбросился кортизол» ты встретишь часто. Я её не использую: у женщины без диабета ночная гипогликемия — редкость, а у людей на инсулине рикошет от ночного сахара оказался скорее мифом. Так что копаем в алкоголь, свет, духоту и приливы, а не в сахар. И ни одна из этих причин не лечится снотворным.</p>`,
+`<p>Депривация сна снижает инсулиночувствительность уже после одной ночи — показано и клэмп-методом, и по НОМА. Механизмы: рост симпатического тонуса и вечернего кортизола, сдвиг секреции грелина и лептина, снижение утилизации глюкозы мозгом.</p>
+<p>Отдельно: короткий сон смещает выбор еды в сторону высокоуглеводной и калорийной, и это видно на фМРТ как рост реактивности миндалины и прилежащего ядра при ослабленном дорсолатеральном префронтальном контроле.</p>`],
+
+["Неделя 1 · Старт","1.3","Движение работает не так, как ты думаешь",
+`<p>Скажу вещь, которая многих расстраивает: <b>тренировкой не переесть.</b></p>
+<p>Час нагрузки — 300–500 калорий, то есть два круассана. Один вечерний срыв перекрывает три тренировки. Именно поэтому женщины ходят в зал полгода без результата и решают, что с ними что-то не так.</p>
+<p>Движение работает иначе, тремя способами.</p>
+<p><b>Как сигнал.</b> Работающая мышца забирает глюкозу из крови <b>без участия инсулина</b>, по отдельному пути. Это единственный способ снять сахар, не поднимая инсулин. Пятнадцать минут ходьбы после еды делают для замка больше, чем час в зале натощак.</p>
+<p><b>Как насос.</b> Каждое сокращение икроножной мышцы толкает лимфу и венозную кровь вверх. Икра — второе сердце, и это не метафора: там есть клапаны.</p>
+<p><b>Как стройка.</b> Регулярная нагрузка увеличивает число митохондрий. Больше печек — больше мест, где жир может сгореть.</p>
+<p>Ходьба после еды входит в ядро первой недели — это самое дешёвое и самое быстрое из всех действий курса. Силовая появится позже, на четвёртой неделе, когда уйдёт отёк и появится энергия для неё.</p>`,
+`<p>Инсулин-независимый путь: сокращение активирует <b>AMPK</b>, и <b>GLUT4</b> транслоцируется на мембрану миоцита без каскада PI3K–Akt.</p>
+<p>Стройка идёт через <b>PGC-1α</b>. Работающая мышца секретирует миокины: <b>IL-6</b> в остром мышечном контексте (ведёт себя иначе, чем воспалительный IL-6 из жировой ткани), <b>BDNF</b>, и обсуждаемый ирисин — с ним связывают появление бежевых адипоцитов с <b>UCP1</b>, хотя роль самого ирисина у человека до сих пор спорят, и часть ранних работ не воспроизвелась.</p>`],
+
+["Неделя 1 · Старт","1.4","Почему клетка перестала слышать",
+`<p>Инсулин стучится в дверь клетки. В норме дверь открывается, глюкоза заходит, сахар падает. При хроническом воспалении дверь заедает: инсулин стучит, внутри не слышат. Поджелудочная делает единственное, что умеет, — кричит громче.</p>
+<p>Нормальный сахар ещё не значит, что всё в порядке: инсулин может быть высоким годами при хорошей глюкозе. Но и один инсулин натощак — не диагноз: лаборатории считают по-разному, единого порога нет, и у одной женщины цифра пляшет от сдачи к сдаче. Смотрим динамику у себя, а не сравниваем с подругой.</p>
+<p>Круг, из которого не выйти самой: высокий инсулин запирает жир → жировая ткань растёт → выделяет вещества воспаления → дверь заедает сильнее → инсулин ещё выше. Круг закручивается сам, без единой лишней конфеты.</p>
+<p>Разрывается он не в точке «меньше есть». Он разрывается в точке «дать инсулину упасть».</p>`,
+`<p>Сигнал идёт через <b>IRS-1</b>: в норме фосфорилируется тирозин, дальше PI3K–Akt, <b>GLUT4</b> выходит на мембрану. При воспалении киназы <b>JNK</b> и <b>IKKβ</b> фосфорилируют IRS-1 по <b>серину</b> — передача ломается.</p>
+<p>Источник воспаления — сама жировая ткань: висцеральные адипоциты и их макрофаги секретируют <b>TNF-α</b> и <b>IL-6</b>. Висцеральный жир не склад, а эндокринный орган.</p>
+<p>Про цикл Рэндла, который часто приводят рядом: это реальный биохимический феномен в сердце и при острой липидной нагрузке, но как объяснение мышечной инсулинорезистентности у человека он неполон — прямые ЯМР-измерения показали дефект выше по течению, на транспорте глюкозы.</p>`],
+
+["Неделя 2 · Замок","2.1","Утро решает день",
+`<p>Первый приём пищи задаёт кривую сахара на весь оставшийся день. Если утро прошло на качелях, к вечеру ты придёшь голодной и раздражённой — и это будет не слабость характера, а последствие завтрака.</p>
+<p><b>Шаг 1. Вода.</b> 500 мл тёплой воды сразу после пробуждения, до всего остального. За ночь ты потеряла жидкость с дыханием: кровь гуще, лимфа медленнее.</p>
+<p><b>Шаг 2. Зелёный сок.</b> 250–500 мл свежего сока натощак, через 15–20 минут после воды. Дальше ещё 15–20 минут до еды.</p>
+<p>Что здесь работает вероятнее всего: калий, объём жидкости, нитраты зелени и почти нулевая нагрузка на пищеварение. Клинических исследований именно сока сельдерея по заявленным эффектам нет — поэтому ритуал важнее конкретного растения, и любой зелёный сок работает так же: огурец, зелень, немного яблока. Две честные оговорки: сельдерей сам богат натрием, так что на верхней границе объёма настаивать не буду, а при склонности к пигментации учти, что в нём есть фотосенсибилизирующие кумарины — не выходи сразу на активное солнце.</p>
+<p>И сразу разведу противоречие, которое иначе бросится в глаза: мы убираем <i>сладкий</i> сок, а не овощной. Разница в сахаре, а не в том, что это сок.</p>
+<p><b>Шаг 3. Утро лёгкое по жиру.</b> Самая недооценённая часть протокола — и здесь я буду честной до конца.</p>
+<p>Причины две, и обе простые. Первая: фруктово-овощное утро — это калий, клетчатка и вода, то есть прямая работа с отёком; жирный завтрак этого не даёт. Вторая: печень и желчный получают несколько часов передышки в сутки.</p>
+<p>А вот версию «жир утром закрывает клетку» я подаю как рамку для проверки, а не как закон. У людей это не показано: эффект липидной нагрузки получают многочасовой инфузией липидов, а не авокадо на тосте, и в исследованиях белок и жир в первом приёме чаще наоборот сглаживают сахар после второго.</p>
+<p>До обеда: фрукты, зелень, овощи, каша на воде. Жиры — авокадо, орехи, масло, семена, яйца — с обеда и дальше. Голодна к одиннадцати — сначала увеличь объём завтрака. Если без жира утро всё равно не держится — добавь его и посмотри на свой вечер. И совсем без жира надолго не уходи: при длинных паузах без жира желчь застаивается, а это путь к камням.</p>`,
+`<p>Нитраты зелени восстанавливаются до нитрита и далее до оксида азота — он расширяет сосуды и улучшает микроциркуляцию. Это самый твёрдый из всех эффектов зелёного сока.</p>
+<p>Про липидную гипотезу завтрака. Избыток внутриклеточных липидных метаболитов (диацилглицерол, церамиды) действительно активирует протеинкиназу C и мешает передаче сигнала на уровне IRS-1 — но получено это на инфузии липидов и при длительной липидной перегрузке, а не на обычном завтраке. Цикл Рэндла в исходной формулировке как объяснение мышечной ИР у человека опровергнут.</p>
+<p>Поэтому формулировка курса такая: лёгкое по жиру утро — способ разгрузить желчный и добавить калия, а не «не создавать себе инсулинорезистентность до обеда».</p>`],
+
+["Неделя 2 · Замок","2.2","Что убираем и в каком порядке",
+`<p>Списка из тридцати запретов здесь не будет. Он не выживает — ни у кого, никогда. Убираем по одному и в понятном порядке.</p>
+<p><b>Сразу и всем — четыре пункта.</b></p>
+<p><i>Жидкий сахар:</i> соки из пакета, газировка, латте с сиропом. Глюкоза и сахароза в жидком виде дают вертикальный инсулиновый пик — клетчаточного тормоза нет.</p>
+<p><i>Еда после 21:00.</i> Не потому что «после шести нельзя» — это миф. А потому что ночью чувствительность к инсулину физиологически ниже, и поздняя еда даёт длинный инсулиновый хвост: всю ночь, когда должно идти жиросжигание, замок закрыт.</p>
+<p><i>Промышленные масла в жарке.</i> При многократном нагреве они дают продукты перекисного окисления, повреждающие мембраны и митохондрии — ту самую печку, в которой мы собираемся жечь жир.</p>
+<p><i>Ультрапереработанное.</i> Всё, у чего состав длиннее трёх строк.</p>
+<p><b>Дальше — по желанию и по показаниям, по одному продукту в неделю.</b></p>
+<p><b>Молочное</b> — при вздутии, слизи, акне после 40, отёчном лице. Оно даёт инсулиновый ответ выше, чем можно ожидать по углеводам, но дело не в лактозе — у неё как раз низкий гликемический индекс, — а в сывороточном белке: он сильно стимулирует инкретины. И сразу честно: сам этот ответ — не повод убирать молочное. В больших наблюдениях молочные продукты не связаны ни с набором веса, ни с диабетом, а творог и йогурт хорошо насыщают. Убираем только по признакам.</p>
+<p><b>Глютен</b> — при вздутии после хлеба и утренней тяжести в голове. У части людей есть нецелиакийная чувствительность. Целиакия — отдельная история: она диагностируется до отказа от глютена, а не после, и это дело врача.</p>
+<p><b>Яйца</b> — при аутоиммунных состояниях и кожных реакциях.</p>
+<p>Нет признаков — не убираем. Это принципиально: мы не создаём дефицитов там, где нет проблемы.</p>
+<p><b>Как проверить, твоё это или нет.</b> Убрала на две недели → вернула на один день → наблюдала 48 часов. Тело ответит вздутием, отёком лица, тяжестью — или тишиной. Это твой личный ответ, и он честнее любого списка.</p>
+<p><b>Фрукты не убираем.</b> Проблема никогда не в яблоке, проблема в стакане пакетированного сока.</p>`,
+`<p>Инсулиновый индекс молочного объясняется белковой фракцией: сывороточный белок резко повышает <b>GIP</b> и <b>GLP-1</b>, а также даёт выброс инсулиногенных аминокислот (лейцин, изолейцин, валин). Лактоза здесь почти не участвует.</p>
+<p>Ночное снижение инсулиночувствительности — часть циркадной организации метаболизма: экспрессия генов-часов в мышце и печени меняет утилизацию глюкозы в течение суток, и один и тот же приём пищи вечером даёт более высокий гликемический ответ, чем утром.</p>`],
+
+["Неделя 2 · Замок","2.3","Часть твоего веса — это не жир",
+`<p>У женщины с выраженным отёчным типом два-три килограмма веса могут приходиться на жидкость в межклеточном пространстве — в матриксе между клетками, который похож на плотный гель. Иногда больше, но 3–5 кг — это уже клинически заметный отёк, а не рядовой случай.</p>
+<p><b>Соль и калий.</b> Дело не в количестве соли, а в её соотношении с калием. Насос, выкачивающий натрий из клетки и закачивающий калий внутрь, есть в каждой клетке, и он один из самых дорогих процессов в теле: по разным оценкам на него уходит от десяти до двадцати с лишним процентов энергии покоя. Старая учебниковая цифра «треть» сейчас считается завышенной — но порядок понятен: держать натрий снаружи, а калий внутри тело платит постоянно. Мало калия — вода уходит наружу, в ткани.</p>
+<p>Где калий: зелень, картофель в кожуре, тыква, авокадо, бананы, курага, фасоль, свёкла, сельдерей, шпинат, петрушка.</p>
+<p>Оговорка, без которой этот список небезопасен: если снижена функция почек, есть сердечная недостаточность или ты принимаешь ингибиторы АПФ, сартаны или калийсберегающие мочегонные — калий и объём жидкости обсуди с врачом. В этих случаях их как раз ограничивают.</p>
+<p><b>Лимфа.</b> У лимфы нет одного центрального сердца — зато у каждого сосуда есть своё: сегмент между клапанами сокращается сам, несколько раз в минуту. Но насосу нужна помощь снаружи: мышцы, дыхательный насос диафрагмы, пульсация артерий. Сидячий день плюс поверхностное дыхание в грудь — и поток падает.</p>
+<p><b>Вода.</b> Если ты отекаешь и пьёшь мало — ты отекаешь <b>потому что</b> пьёшь мало: растёт вазопрессин, почка удерживает всё, что приходит. Стабильное питьё снимает режим за три-пять дней; первые два дня отёк может усилиться — это ожидаемо. Ориентир 30 мл на кг, между приёмами пищи.</p>`,
+`<p>Часть натрия складируется в коже в связке с гликозаминогликанами — осмотически неактивно, без воды. Само депо отёка не даёт, но перегруженный матрикс поддерживает местное воспаление, а избыток соли смещает баланс Старлинга на капилляре.</p>
+<p>Насос — <b>Na⁺/K⁺-АТФаза</b>. Сегмент лимфатического сосуда между клапанами — <b>лимфангион</b>, его стенка содержит миоциты и сокращается фазно; это первичный механизм лимфотока.</p>
+<p>Вазопрессин через V2-рецепторы встраивает <b>аквапорин-2</b> в мембрану собирательных трубочек — почка открывает каналы обратного всасывания воды.</p>`],
+
+["Неделя 2 · Замок","2.4","Живот, который не про еду",
+`<p>Женщина говорит: полгода занимаюсь, питаюсь правильно, а живот на месте. И часто она права — её живот действительно не про жир. Причин четыре, и только одна из них про еду.</p>
+<p><b>Геометрия.</b> При поясничном гиперлордозе — а он есть у большинства женщин, которые много сидят и носят каблуки, — таз наклонён вперёд, поясница выгнута, и содержимое живота выталкивается вперёд. Это не жир, это положение костей. Качать пресс здесь бесполезно: при зажатых сгибателях бедра это всё равно что тянуть верёвку, натянутую до предела. Сначала расслабляем то, что тянет.</p>
+<p><b>Дыхание.</b> Если дышишь верхом груди, диафрагма не опускается. А диафрагма — это и насос для лимфы, и естественный массаж органов, и часть системы, которая держит живот изнутри.</p>
+<p><b>Вздутие.</b> Газ в кишечнике даёт объём, который принимают за жир. Утром живот плоский, к вечеру на два размера больше — это всегда про пищеварение. Работает порядок еды, отказ от того, что лично тебе не подходит, и промежутки между приёмами.</p>
+<p><b>И только четвёртая причина — висцеральный жир.</b> Он отзывается на паузы и нагрузку охотнее подкожного, потому что метаболически активнее. Но предупрежу честно: первым это увидит не зеркало, а анализы и сантиметр. Тот живот, который ты видишь в отражении, — это в основном подкожный жир плюс геометрия плюс вздутие, и он отзывается позже. Зато печень, инсулин и талия двигаются раньше.</p>
+<p><b>Что делаем.</b> Диафрагмальное дыхание — пять минут утром лёжа: ладони на нижних рёбрах, вдох носом так, чтобы рёбра разошлись в стороны под ладонями, а не поднялась грудь и не выпятился живот; выдох длиннее вдоха.</p>
+<p>И следом вакуум, натощак: полный выдох, закрытое горло, движение вдоха грудью без воздуха — живот сам уходит под рёбра. Это самый сильный способ поднять диафрагму и натянуть внутреннюю плёнку, которая держит органы. Подробная техника и противопоказания — в задании десятого дня.</p>`,
+`<p>Поперечная мышца живота — самый глубокий слой брюшной стенки, волокна идут горизонтально. Вместе с диафрагмой, мышцами тазового дна и многораздельными мышцами она образует систему внутрибрюшного давления.</p>
+<p>Висцеральная жировая ткань метаболически активнее подкожной: выше плотность β-адренорецепторов, лучше ответ на липолитический сигнал. Её венозный отток идёт прямо в воротную вену печени — поэтому именно висцеральный жир так влияет на печень и инсулинорезистентность.</p>`],
+
+["Неделя 3 · Тормоз","3.1","Дренаж: сначала центр, потом периферия",
+`<p>Главное правило дренажа, которое почти все нарушают: <b>сначала открываем центральные пути, потом гоним жидкость с периферии.</b> Иначе ты толкаешь воду в закрытую дверь — и удивляешься, почему массаж ног не даёт результата.</p>
+<p>Правильный порядок: сначала дыхание диафрагмой, оно двигает главный лимфатический проток. Потом мягкая работа по шее и надключичной области. И только потом ноги, живот, руки.</p>
+<p><b>Что делаем каждый день.</b></p>
+<p>Утром — пять минут диафрагмального дыхания лёжа, следом вакуум натощак: восемь-десять удержаний по десять-пятнадцать секунд. Дыхание раскрывает путь, вакуум даёт самый сильный перепад давления, какой ты можешь создать сама.</p>
+<p>Днём — ходьба после каждой еды и семь тысяч шагов фоном. Это два самых работающих пункта в списке.</p>
+<p>Вечером — пять-семь минут ногами вверх у стены, и прямо в этом положении то же дыхание рёбрами. Это самая надёжная часть дренажа: сила тяжести и перепад давления в грудной клетке, без всякой эзотерики.</p>
+<p>В конце душа — тридцать-шестьдесят секунд прохладной воды. Короткий адреналиновый импульс и прилив бодрости, и этого достаточно, чтобы её делать. Но бурый жир она всерьёз не включает: для этого нужны часы в прохладе, а не минута в душе. Осторожно при гипертонии, аритмии и болезнях сердца.</p>
+<p><b>Про сухую щётку, которую обязательно спросят.</b> Её рекомендуют везде, но доказательств, что она двигает лимфу, нет. Это стимуляция кожи, и как уход за кожей она хороша. Как дренаж — нет, и в протокол я её не ставлю. Если делаешь и нравится — не делай по воспалённой коже, по варикозным венам и при лимфедеме после операций.</p>
+<p>Чего не делаем: не гоним воду мочегонными. Настоящие диуретики вымывают калий и магний и бьют по сердцу, а травяные чаи просто гонят воду, не трогая причину — перестала пить, отёк вернулся.</p>`,
+`<p>Холод активирует симпатическую систему → норадреналин → β-адренорецепторы адипоцита → аденилатциклаза → цАМФ → липолиз. В бурой и бежевой ткани работает <b>UCP1</b>: он разобщает дыхательную цепь, протоны возвращаются в матрикс мимо АТФ-синтазы, энергия уходит в тепло.</p>
+<p>Количественная оговорка: вклад бурой ткани в суточный расход у взрослого человека не установлен точно, а протоколы, которые её реально активируют, — это часы при 16–19 °C, не минута прохладного душа. Поэтому холод в курсе стоит ради тонуса и цАМФ, а не ради килограммов.</p>`],
+
+["Неделя 3 · Тормоз","3.2","Кортизол против твоего веса",
+`<p>Кортизол не враг. Это гормон утреннего подъёма и мобилизации, без него ты бы не встала с кровати. Проблема не в нём, а в сломанном ритме.</p>
+<p>В норме пик приходится на первые полчаса-сорок минут после пробуждения, дальше плавное снижение, минимум около полуночи — тогда поднимается мелатонин и приходит глубокий сон. Инверсия: утром вялость, к вечеру подъём. То самое «весь день никакая, а в одиннадцать я живая и хочу есть».</p>
+<p><b>Три удара по весу.</b></p>
+<p>Кортизол заставляет печень саму делать глюкозу, даже если ты ничего не ела. Глюкоза → инсулин → замок закрыт. Можно закрыть себе жиросжигание, просто понервничав.</p>
+<p>Кортизол вместе с инсулином даёт команду складывать жир именно в живот.</p>
+<p>Кортизол тормозит превращение гормона щитовидки в активную форму — обмен замедляется на уровне каждой клетки.</p>
+<p>Плюс задерживает натрий и воду: отсюда утренняя одутловатость после плохой ночи.</p>`,
+`<p>Первое — глюконеогенез: кортизол повышает экспрессию ФЕПКК и глюкозо-6-фосфатазы.</p>
+<p>Второе — <b>11β-HSD1</b> превращает неактивный кортизон обратно в активный кортизол прямо внутри жировой ткани; при ожирении его активность растёт. Кортизол в присутствии инсулина повышает активность <b>липопротеинлипазы</b>, сильнее всего в сальниковой ткани.</p>
+<p>Третье — кортизол сдвигает работу дейодиназ: падает активность D1/D2 и растёт D3, и Т4 уходит в неактивный <b>реверс-Т3</b>.</p>`],
+
+["Неделя 3 · Тормоз","3.3","Почему тебя срывает вечером",
+`<p>Начнём с того, что снимает вину. У женщины с лишним весом лептина — гормона сытости — много. Очень много, ведь его производит сама жировая ткань. Но мозг его не слышит: воспаление обрывает передачу сигнала на первой же ступени внутри нейрона.</p>
+<p>Мозг делает единственный доступный вывод: запасов нет. И ведёт себя как при голоде — повышает аппетит, снижает расход, требует калорийное. Женщина в это время смотрит в зеркало и видит противоположное.</p>
+<p><b>Её мозг искренне считает, что она голодает.</b> Она не переедает от жадности — она подчиняется команде из отдела, не подчиняющегося сознанию.</p>
+<p>И сразу честно про лечение: починить лептиновый сигнал едой пока не умеет никто, и я не буду этого обещать. Что действительно работает — меньше воспаления, нормальный сон и умеренный темп снижения веса. Чем резче падает лептин, тем сильнее мозг давит обратно. Мы не чиним лептин. Мы не пугаем его резкостью.</p>
+<p><b>Анатомия вечернего срыва.</b> К девяти вечера сходятся четыре вещи.</p>
+<p>Гликемический долг: если днём было мало настоящей еды, тело добирает — и добирает быстрым.</p>
+<p>Истощение самоконтроля: он метаболически дорог, каждое решение за день тратит ресурс, и к вечеру решения принимает лимбическая система.</p>
+<p>Дофаминовый дефицит: еда — самый доступный способ поднять дофамин. Если день был без радости, мозг придёт за ней на кухню. Это проблема пустого дня, а не еды.</p>
+<p>Кортизольная инверсия: при сломанном ритме вечером кортизол повышен, а он прямо усиливает тягу к калорийному.</p>
+<p><b>Вывод, который меняет всё: срыв в девять вечера готовится с семи утра.</b></p>
+<p><b>Что делать конкретно.</b> Правило двадцати минут: накрыло — вода, реальная еда, подождать двадцать минут. Метаболическая тяга уйдёт; осталась — она эмоциональная, и это другой разговор. Не запрещать полностью: запрет повышает ценность запрещённого. Мы не запрещаем — переносим: сладкое после еды, а не вместо; днём, а не вечером. И убрать самобичевание: оно повышает кортизол и запускает следующий срыв.</p>`,
+`<p>Лептин действует на нейроны дугообразного ядра гипоталамуса через <b>JAK2–STAT3</b>: активирует POMC-нейроны, тормозит AgRP/NPY. При гипоталамическом воспалении растут <b>SOCS3</b> и фосфатаза <b>PTP1B</b>, обрывающие путь на уровне JAK2. Рецептор сигнал принял — каскад обрывается на первой же ступени.</p>
+<p>Важная оговорка: попытки «восстановить чувствительность к лептину» диетой не имеют доказанной основы. Что показано — снижение гипоталамического воспаления на моделях и обратная зависимость компенсаторного ответа от скорости потери веса у человека.</p>`],
+
+["Неделя 3 · Тормоз","3.4","Как развернуть ритм",
+`<p>Мы не будем заставлять себя ложиться в одиннадцать. Через силу это не работает. Мы сдвинем сами часы — и тело захочет спать раньше само, обычно за четыре-пять дней.</p>
+<p><b>Утренний свет</b> — 10 минут на улице в первый час после пробуждения, без солнечных очков; в пасмурный день дольше. Чем ярче свет и чем дольше выход, тем заметнее сдвиг.</p>
+<p><b>Вечернее затемнение</b> — за полтора часа до сна верхний свет выключен, только тёплые лампы снизу.</p>
+<p><b>Ужин за три часа до сна, с небольшой углеводной частью.</b> Именно немного углеводов, а не ноль. Но причина не та, которую обычно называют: утренний подъём кортизола идёт по внутренним часам и случается у тебя даже после плотного ужина, это не аварийная реакция на упавший гликоген. Углеводы вечером нужны проще: они помогают заснуть, закрывают голод и не оставляют тебя в постели с мыслью о хлебе. Этого достаточно, чтобы они были в тарелке.</p>
+<p><b>Дыхание 4–6</b> — вдох на четыре счёта, выдох на шесть, пять минут перед сном и в любой момент тревоги днём.</p>
+<p><b>Магний вечером</b> — глицинат или цитрат за час до сна. При болезнях почек — только после врача.</p>`,
+`<p>Свет действует через меланопсиновые ганглионарные клетки сетчатки → супрахиазматическое ядро → шишковидная железа. Сдвиг вечернего мелатонина на полчаса-час описан для яркого света длительностью 30+ минут; от десяти минут на улице в пасмурный день он будет скромнее, но в ту же сторону.</p>
+<p>Удлинённый выдох повышает тонус вагуса: тот выделяет ацетилхолин, который через <b>α7-никотиновые рецепторы</b> макрофагов снижает выброс <b>TNF-α</b>. Это холинергический противовоспалительный рефлекс — описанный путь. Показан он при прямой стимуляции эфферентного вагуса; что дыхание 4–6 снижает TNF-α у человека до метаболически значимой величины, пока не измерено. Дыхание работает в ту же сторону — а надёжно измеренный его эффект это тревога и засыпание.</p>
+<p>Гликогена печени у взрослой женщины 80–100 г, этого хватает на 12–16 часов — за ночь после нормального ужина он не кончается.</p>`],
+
+["Неделя 4 · Печка","4.1","Куда девается жир на самом деле",
+`<p>Жир вышел из клетки. Дальше он связывается с белком крови и плывёт к мышце, печени или сердцу — туда, где его могут потратить. И упирается в турникет: длинная жирная кислота сама внутрь печки не пройдёт, нужен переносчик.</p>
+<p>Турникет блокируется при избытке углеводов: клетка считает, что топлива и так полно. Открывается — когда включается датчик энергодефицита, а он включается от паузы между едой, ночного окна, движения и холода. Вот почему всё, что мы делали три недели, ведёт именно сюда.</p>
+<p>И о том, куда жир девается физически: он не выходит с потом и не «сгорает в пламени». Углерод жирной кислоты покидает тело в основном <b>с выдохом</b>, в виде углекислого газа, и частично с водой. Ты выдыхаешь свой жир.</p>`,
+`<p>Жирная кислота активируется до ацил-КоА и не проходит внутреннюю мембрану сама. <b>CPT1</b> пересаживает ацильную группу с КоА на карнитин, транслоказа переносит внутрь, <b>CPT2</b> возвращает обратно. Дальше β-окисление → ацетил-КоА → цикл Кребса → NADH и FADH₂ → дыхательная цепь → АТФ-синтаза.</p>
+<p>CPT1 ингибируется <b>малонил-КоА</b>, продуктом ACC; <b>AMPK</b> фосфорилирует и выключает ACC — малонил-КоА падает, турникет открывается. Всё сказанное относится к длинноцепочечным жирным кислотам: коротко- и среднецепочечные входят в митохондрию без карнитинового челнока.</p>`],
+
+["Неделя 4 · Печка","4.2","Чем кормить печку",
+`<p>Митохондрия — это конвейер, и на каждом его шаге нужны кофакторы. Если их нет, процесс идёт вполсилы, и никакое питание этого не компенсирует. Вот биохимический ответ на жалобу «правильно питаюсь, а сил нет».</p>
+<p><b>Магний</b> — АТФ существует в клетке только как Mg-АТФ. Нехватка: судороги, тревога, бессонница. Где взять: зелень, тыквенные семечки, какао.</p>
+<p><b>B1</b> — вход в цикл Кребса. Нехватка: слабость, отёки, туман в голове. Гречка, бобовые, семечки.</p>
+<p><b>B2</b> — работает прямо в β-окислении. Нехватка: трещины в углах рта. Зелень, миндаль, грибы.</p>
+<p><b>B3</b> — основная валюта дыхания. Нехватка: усталость. Грибы, семечки, гречка.</p>
+<p><b>Железо</b> — дыхательная цепь. Нехватка: одышка, холодные руки, выпадение волос. Зелень с витамином С, бобовые. В таблетках — только по анализу и с врачом.</p>
+<p><b>CoQ10</b> — переносчик внутри цепи, падает с возрастом и на статинах. <b>Карнитин</b> — челнок в митохондрию, синтезируется из лизина и метионина при участии витамина С и железа.</p>
+<p>Отдельно <b>селен, цинк, йод, железо</b> — для щитовидной железы: фермент, превращающий Т4 в активный Т3, селензависим. Одного бразильского ореха в день достаточно; больше не надо, содержание селена в них скачет в разы — и не совмещай с мультивитамином, где селен уже есть.</p>
+<p><b>Почему мы не режем калории.</b> Образование активного Т3 ломают: хронический кортизол, дефицит селена, цинка и железа, воспаление и жёсткий дефицит калорий. Последнее не поломка, а адаптация: тело сознательно замедляется, когда чувствует голод. У женщины 45+ с усталыми надпочечниками дефицит первым делом обрушивает щитовидку и заканчивается плато, с которого не выйти.</p>
+<p><b>Мышца.</b> Силовая два раза в неделю по 20–30 минут. Мышца — главный потребитель глюкозы и главное место, где живут митохондрии. Женщина, которая только ходит, теряет вес вместе с мышцей. Силовая здесь не для красоты, а для метаболизма.</p>`,
+`<p>Дыхательная цепь: комплекс I (FMN, Fe-S), II (FAD), III (гемы, Fe-S), IV (гемы a/a₃, медь). Отсюда зависимость от железа, меди, рибофлавина и ниацина — все они входят в состав переносчиков, а не «помогают» абстрактно.</p>
+<p>Дейодиназы D1 и D2 — селенопротеины; при дефиците селена конверсия Т4 → Т3 падает. Йод при этом нужен в норме, а не в избытке: большие дозы при аутоиммунном тиреоидите могут ухудшить течение.</p>`],
+
+["Неделя 4 · Печка","4.3","Печень: орган, о котором забывают",
+`<p>Печень — главный орган метаболизма жиров и главный фильтр. Всё, что мы делаем в курсе, проходит через неё. И если она перегружена, вес будет стоять даже при идеальном ритме еды.</p>
+<p>Перегружают её: алкоголь, избыток рафинированной фруктозы, лекарства, промышленные масла, хронический избыток жиров и жировой гепатоз — он есть у очень многих женщин с животом и повышенной АЛТ.</p>
+<p><b>Лёгкое по жиру утро.</b> Печень и желчный получают несколько часов передышки в сутки. Вводим это на восьмой день, сразу после ядра.</p>
+<p><b>Горькая зелень.</b> Руккола, цикорий, одуванчик, редис, артишок. Горечь — сигнал к желчеотделению: вкусовые рецепторы горького запускают рефлекторную работу желчного пузыря. Важно: при камнях в желчном пузыре горечи и артишок не добавляем, стимулировать желчеотделение в этом случае нельзя.</p>
+<p><b>Крестоцветные.</b> Брокколи, брюссельская, цветная, капуста, ростки брокколи. В них глюкозинолаты, из которых образуется сульфорафан. Практическая деталь, которую почти всегда пропускают: сульфорафан образуется ферментом мирозиназой, а варка её инактивирует — из варёной брокколи сульфорафана выходит в несколько раз меньше. Поэтому сырое, бланшированное минуту-две, или щепотка горчичного порошка к готовому блюду. Больше всего предшественника в ростках брокколи.</p>
+<p><b>Вода и клетчатка.</b> Печень выбрасывает переработанное в желчь, желчь идёт в кишечник — и если клетчатки мало, часть выброшенного всасывается обратно.</p>
+<p><b>Про смузи с водорослями.</b> В протоколе Уильяма есть смузи из пяти компонентов — дикая черника, спирулина, ячменная трава, кинза, дульсе, — который подаётся как средство выведения тяжёлых металлов. Скажу честно: клинических подтверждений адресного выведения металлов именно этим составом нет. Но сам смузи — хорошая еда: дикая черника один из самых плотных источников антоцианов, спирулина и ячменная трава дают хлорофилл, минералы и белок, кинза богата полифенолами.</p>
+<p>И отдельно про дульсе и любые морские водоросли. Йода в них очень много — одна порция может перекрыть суточную норму в десятки раз. При аутоиммунном тиреоидите большие дозы йода способны ухудшить течение, а у женщин нашего возраста он встречается часто. Поэтому: если у тебя есть антитела к ТПО, повышенный ТТГ или ты на тироксине — дульсе и ламинарию убираем, остальной состав оставляем. И спирулину берём только проверенного производителя: это цианобактерия, и загрязнённое сырьё бывает.</p>
+<p>Поэтому я даю смузи как питательный завтрак, а не как процедуру очищения. Разница принципиальная, и ты теперь её видишь.</p>`,
+`<p>Первая фаза детоксикации — цитохромы <b>P450</b>. Важно понимать, что она не обезвреживает: она делает вещество <i>более</i> реакционноспособным, вводя функциональные группы. Безопасным его делает вторая фаза — конъюгация: глюкуронирование, сульфатирование, связывание с глутатионом. Вторая фаза требует серы, глицина, магния и витаминов группы B. Поэтому «стимулировать детокс» без второй фазы — не безобидная идея.</p>
+<p>Сульфорафан активирует <b>Nrf2</b>: фактор освобождается от Keap1, уходит в ядро и включает гены антиоксидантной защиты — глутатион-S-трансферазы, гемоксигеназы-1, NQO1. Это индукция собственной защиты клетки, а не внешний антиоксидант.</p>
+<p>Энтерогепатическая циркуляция: конъюгаты выводятся с желчью, но бактериальная β-глюкуронидаза может их расщепить, и вещество всасывается обратно. Клетчатка и здоровая микробиота снижают эту петлю.</p>`],
+
+["Неделя 4 · Печка","4.4","Что остаётся после курса",
+`<p>Двадцать восемь дней заканчиваются, а тело остаётся. Поэтому последний урок — про то, что забрать с собой.</p>
+<p><b>Двенадцать действий.</b> Они собраны в разделе «Практика». Это не диета, а конструкция дня. Её можно вести годами, потому что в ней нет запретов.</p>
+<p><b>Правило 80/20.</b> Пять дней база, два — жизнь. Тело без хронического воспаления и с восстановленной метаболической гибкостью спокойно это переваривает. Метаболическая гибкость — способность легко переключаться между глюкозой и жиром как топливом — и есть настоящая цель месяца.</p>
+<p><b>Если вес встал.</b> Три сценария, и лечатся они по-разному. Метаболическая адаптация: лептин упал, тело снизило расход — лечится не урезанием, а одним-двумя днями с нормальными углеводами. Рекомпозиция: вес стоит, объёмы уходят — смотрим сантиметр, а не весы. Вода: стресс, соль, цикл, начало силовых — уйдёт за три-семь дней сама. Меняем <b>один</b> параметр и ждём десять дней.</p>
+<p><b>Почему вес возвращается после диет и почему не вернётся здесь.</b> Диета работает с расходом, а замок остаётся закрытым — кончилась диета, всё вернулось. На жёстком дефиците без нагрузки до трети потерянного веса уходит нежировой массой — мышцы, вода, гликоген, — а меньше мышцы означает выше инсулин в покое. И третье: если вернуть шесть перекусов, четыре часа сна и вечерний сахар — вернётся и результат. Физиология не знает исключений.</p>`,
+`<p>Метаболическая адаптация при снижении веса: расход покоя падает сильнее, чем предсказывает потеря массы, за счёт снижения лептина, Т3 и симпатического тонуса, плюс падает спонтанная нетренировочная активность (NEAT) — это самый недооценённый компонент.</p>
+<p>Рефид работает через частичное восстановление лептина и тиреоидной конверсии; эффект на вес виден через три-четыре дня после, а не во время.</p>`]
+];
+// ===== КОД ДОСТУПА: приходит на почту после оплаты =====
+// На новый поток меняй цифру: Kluch2026, Kluch2027 — так видно, кто с какого набора.
+const ACCESS_CODES={
+  "Kluch2025": {tier:"solo", name:"КЛЮЧ · 28 дней", chat:false}
+};
+
+// ===== ССЫЛКИ: ПОМЕНЯТЬ НА СВОИ ПЕРЕД ПУБЛИКАЦИЕЙ =====
+const LINKS={
+  pay:"https://t.me/TatyanaVesna",      // страница оплаты
+  author:"https://t.me/TatyanaVesna"    // личные сообщения
+};
+
+const NAMES={zamok:["Замок","инсулин"],klyuch:["Ключ","адреналин и цАМФ"],tormoz:["Тормоз","кортизол"],pechka:["Печка","митохондрии"]};
+
+// QUESTIONS: [текст, звено]
+const QUESTIONS=[
+["Между завтраком, обедом и ужином ты что-то подъедаешь: орешки, йогурт, кусочек сыра, печенье к чаю.","zamok"],
+["Ты просыпаешься ночью примерно в три-четыре часа. Не от шума, просто просыпаешься — и лежишь.","tormoz"],
+["Ты мёрзнешь там, где другим нормально. Носки дома, плед летом, руки холодные почти всегда.","pechka"],
+["Твой день проходит сидя: работа, машина, вечером диван. Шагов меньше пяти тысяч.","klyuch"],
+["После нормального обеда всё равно хочется сладкого. Не от голода — просто «чем-то закончить».","zamok"],
+["Волос на расчёске и в сливе стало заметно больше. Хвост стал тоньше.","pechka"],
+["Утром лицо не такое, каким было вечером: припухшие веки, следы от подушки долго не проходят, кольцо туго идёт.","tormoz"],
+["Между приёмами пищи у тебя редко проходит больше трёх часов подряд без единой калории. Чай с молоком тоже считается.","klyuch"],
+["Через час-полтора после обеда накрывает: тяжёлая голова, слипаются глаза, хочется прилечь.","zamok"],
+["Мысли крутятся, внутри фоновое напряжение, а к вечеру вдруг появляются силы — и ты ложишься позже, чем собиралась.","tormoz"],
+["Обычная нагрузка даётся тяжело: два лестничных пролёта, и ты дышишь. После тренировки не бодрость, а разбитость на два дня.","pechka"],
+["Утро начинается с еды почти сразу после подъёма. Прохлады в твоей жизни нет: тёплый дом, горячий душ, никогда не бывает зябко специально.","klyuch"],
+["Ты ешь объективно немного — и вес не двигается. Иногда даже растёт, и ты не понимаешь почему.","zamok"],
+["Основной объём — живот и талия. Ноги и руки выглядят нормально, талия просто «стёрлась».","tormoz"],
+["В анализах тебе говорили: ферритин низковат, ТТГ на верхней границе, витамин D маловат. «Но в целом всё в норме».","pechka"],
+["После еды ты садишься или ложишься. Пройтись двадцать минут после ужина — не твоя история.","klyuch"]
+];
+
+const ANSWERS=["никогда","иногда","часто","это прямо про меня"];
+
+// RESULTS: подробный разбор по звену
+const RESULTS={
+zamok:`<h3>Сломан замок · инсулин</h3>
+<p>Жировая клетка заперта. Представь: капля жира внутри клетки лежит не голой — сверху плёнка, как крышка на банке. Пока крышка на месте, то, что умеет резать жир, до него просто не добирается.</p>
+<p>Крышка сдвигается только по одному сигналу — «можно тратить». А этот сигнал стирается каждый раз, когда поднимается инсулин. И поднимается он не на сладкое, а на любую еду вообще: чай с молоком, три орешка, кусочек сыра к чаю — каждый раз новая волна.</p>
+<p>Получается, что дело не в том, сколько ты съела, а в том, <b>сколько часов в сутки у тебя высокий инсулин</b>. При шести приёмах он почти не успевает опуститься: следующая волна приходит раньше, чем закончилась предыдущая. Крышка не сдвигается вообще никогда. Те же самые калории в три приёма — это три волны и три длинных промежутка, в которых жир действительно выходит.</p>
+<p><b>Почему диеты у тебя не работали.</b> Ты считала калории, а считать надо было часы.</p>
+<p>Отсюда же твой дневной провал после обеда: сахар резко подскочил, инсулин вышел с запасом, уровень упал ниже исходного — и тебя накрывает сонливостью. И тяга к сладкому приходит не от слабости характера: мозг требует вернуть то, что сам же и обрушил.</p>
+<p><b>Твоё действие входит в первый день</b> — три приёма, ноль перекусов. Это самое первое, что мы делаем в курсе, и у тебя оно главное.</p>
+<p><b>Первый шаг на завтра.</b> Не меняй, что ешь. Запиши время каждого попадания еды в рот — включая чай с молоком и три орешка со стола коллеги. Просто время. Вечером найди самый длинный промежуток: скорее всего, он окажется короче, чем ты думала.</p>`,
+
+klyuch:`<h3>Сломан ключ · сигнал «отпусти жир»</h3>
+<p>Замок, может быть, и открылся бы — но команды «отпусти жир» никто не подаёт.</p>
+<p>Чтобы крышка с капли жира сдвинулась, телу нужен сигнал. И этот сигнал дают вполне конкретные вещи: пауза между едой, движение, прохлада, глубокий сон, утро без немедленного завтрака. Посмотри на свой день — все они оттуда пропали. Тёплая квартира, машина, лифт, еда каждые два часа.</p>
+<p>У тела просто нет ни одного повода вскрывать запасы. И оно их не вскрывает — зачем, если всё и так приносят.</p>
+<p>Ты не ленивая. Ты живёшь в условиях, где ни один из этих сигналов не возникает сам.</p>
+<p><b>Почему диеты у тебя не работали.</b> Ты уменьшала приход, но не создавала спроса. А тело без спроса на топливо предпочитает экономить: ты становишься медленнее, меньше двигаешься, не замечая этого. Расход падает вслед за приходом, и вес встаёт.</p>
+<p><b>Про твой случай отдельно.</b> У мышцы есть собственная дверь для сахара — она открывается от самого движения, без всякого инсулина. Это единственный способ снять сахар из крови, не поднимая инсулин. Двадцать минут ходьбы после ужина работают именно так, и ты этим инструментом просто не пользуешься.</p>
+<p><b>Твоё действие входит на четвёртый день</b> — ходьба после каждой еды. Но первые три дня не пропускай: если инсулин весь день высокий, любой сигнал упирается в закрытую крышку, и ты будешь гулять после ужина без эффекта.</p>
+<p><b>Первый шаг на завтра.</b> После ужина выйди на улицу на пятнадцать минут. Не «в спортивной форме», не «нормально начну с понедельника». Куртка, подъезд, круг вокруг дома. Один раз — и запиши, как спалось этой ночью.</p>`,
+
+tormoz:`<h3>Сломан тормоз · кортизол</h3>
+<p>Ты можешь делать всё правильно и не двигаться с места. Кортизол — гормон стресса и утреннего подъёма — бьёт с трёх сторон сразу, и это самое неприятное звено: оно ломает остальные три.</p>
+<p><b>Первое.</b> Кортизол заставляет печень саму производить сахар — даже если ты вообще ничего не ела. Сахар в крови растёт, следом поднимается инсулин, крышка закрывается. Без единой съеденной конфеты. Вот почему после плохой ночи вес наутро стоит, хотя ужин был идеальный.</p>
+<p><b>Второе.</b> Жировая ткань на животе умеет сама себе добывать кортизол — она достраивает его из неактивной формы прямо на месте. И там же, под действием кортизола вместе с инсулином, усиливается захват жира внутрь. Получается локальная ловушка: жир складывается именно в живот. Это и есть ответ на вопрос «почему ноги нормальные, а талия исчезла».</p>
+<p><b>Третье.</b> Кортизол мешает гормону щитовидной железы перейти в активную форму. Обмен замедляется на уровне каждой клетки, а в анализах при этом может быть «всё в норме».</p>
+<p>И вода. Кортизол задерживает соль, соль тянет за собой воду — отсюда утреннее лицо, которое ты не узнаёшь.</p>
+<p><b>Почему диеты у тебя не работали.</b> Любая диета — это дополнительный стресс, и ты каждый раз добавляла кортизол сверху уже высокого. Дефицит, кардио натощак, недосып, самокритика — для мозга это один и тот же сигнал. Ты жала на газ и на тормоз одновременно и удивлялась, что машина не едет.</p>
+<p>А вечерний подъём сил, который ты приняла за «я сова», — это перевёрнутый суточный ритм: кортизол должен быть высоким утром и низким вечером, а у тебя наоборот.</p>
+<p><b>Работа со светом входит на пятый день</b> — специально так рано, потому что для тебя это главное. И мерь отёк лица с первого дня: у тебя именно эта цифра поедет раньше веса.</p>
+<p><b>Первый шаг на завтра.</b> Поставь будильник не на подъём, а на отбой — за час до сна. По сигналу гаси верхний свет и убери телефон из спальни. Один вечер.</p>`,
+
+pechka:`<h3>Сломана печка · энергия клетки</h3>
+<p>Жир может выходить из клетки, но ему негде гореть.</p>
+<p>Жир сгорает не «в пламени» и не в мышцах вообще — он сгорает внутри крошечных печек, которые есть в каждой клетке. Вход в такую печку один, и работает он как турникет: открывается, когда телу действительно нужна энергия — от паузы между едой, ночного окна, движения, прохлады. И закрывается, когда углеводов в избытке: клетка считает, что топлива и так полно.</p>
+<p>Но даже открытый турникет мало что даёт, если печке нечем работать. Ей нужны детали: железо, витамины группы B, магний, медь. Железо здесь главное — а у женщины 35–60 с циклом его запас низкий очень часто. Отсюда вся твоя картина: зябкость, одышка на лестнице, волосы на расчёске. Волосяной фолликул — один из самых прожорливых органов в теле, и при нехватке ресурса тело выключает его первым. Без волос жить можно.</p>
+<p>Отдельная история — щитовидная железа. Её гормон буквально задаёт, сколько печек будет в клетке и как быстро они работают. ТТГ 3,5 при границе «до 4» — формально норма, фактически вялая печка.</p>
+<p><b>Почему диеты у тебя не работали.</b> Ты каждый раз входила в дефицит с уже пустыми запасами, и тело делало единственное разумное: снижало расход. Ты мёрзла сильнее, уставала быстрее, волосы лезли активнее — и это был не побочный эффект, а сама суть происходящего. Организм не худел, он замедлялся.</p>
+<p><b>Твои дни — двадцать второй, двадцать третий и двадцать четвёртый</b>: силовая и детали для печки. Но анализы сдай на первой неделе — результат придёт как раз к тому моменту, когда понадобится.</p>
+<p><b>Первый шаг на завтра.</b> Запишись на анализы или, если они есть, выпиши четыре цифры: ферритин, ТТГ, Т3 свободный, витамин D. Не по коридору «норма», а по столбцу «оптимум» — он в разделе «Дневник». И начни отмечать энергию в 16:00: у тебя это главный показатель, он поедет раньше веса.</p>`
+};
+
+const MULTI=`<div class="note"><b>У тебя сломано больше одного звена — и это обычная ситуация.</b> У большинства женщин, которые приходят на курс, красных звеньев два, часто три.
+<p>Так и должно быть, потому что звенья связаны. Плохой сон поднимает кортизол, кортизол через печень поднимает глюкозу и инсулин, высокий инсулин глушит цАМФ и одновременно копит малонил-КоА, который закрывает вход в митохондрию. Одна поломка тянет соседнюю.</p>
+<p>Порядок работы от этого не меняется: ядро первой недели бьёт по всем четырём звеньям сразу. Просто на своей неделе задержись и не иди дальше формально. И перепройди тест на четырнадцатый и двадцать восьмой день.</p></div>`;
+
+// HABITS: двенадцать действий = двенадцать дней ввода
+const HABITS=[
+["Три приёма, ноль перекусов","Между ними вода, травяной чай, чёрный кофе без молока. Каждый перекус — новая инсулиновая волна."],
+["Ночное окно 12–13 часов","Ужин в 19:00 — завтрак в 7:00–8:00. Кухня закрывается в 21:00. Не удлиняем до шестнадцати."],
+["Порядок в тарелке","Зелень и овощи → белок и жир → углеводы. В каждый приём, включая обед в столовой."],
+["Ходьба после еды и 7000 шагов","10–15 минут после каждого приёма плюс фон за день. Сахар в мышцу без инсулина и насос для лимфы."],
+["Свет: утро и вечер","10 минут на улице в первый час после подъёма. За полтора часа до сна верхний свет выключен."],
+["Вода по норме","30 мл на килограмм, между приёмами пищи. Первый стакан — сразу после пробуждения."],
+["Утро без тяжести","До обеда фрукты, зелень, овощи, каша на воде. Жиры с обеда. Совсем без жира надолго не уходим."],
+["Дыхание диафрагмой","5 минут утром лёжа: на вдохе рёбра расходятся в стороны, не грудь вверх и не живот вперёд."],
+["Вакуум","Натощак, 8–10 удержаний по 10–15 секунд. Самый сильный перепад давления, какой можно создать самой."],
+["Зелень, горечи и крестоцветные","Горькая зелень и капуста каждый день, клетчатка в каждый приём. Кормим обе смены печени."],
+["Вечер: ужин, ноги вверх, магний","Ужин за три часа до сна с углеводной частью, пять минут ногами вверх, магний за час до сна."],
+["Силовая дважды в неделю","20–30 минут своим весом. Не ради рельефа, а ради топки и сохранения мышцы."]
+];
+
+const SCALE=[
+["0","Лицо утром такое же, как было вечером. Овал чёткий, веки обычные, кольцо снимается легко."],
+["1","Лёгкая припухлость век, к завтраку проходит. Черты в целом свои."],
+["2","Овал размыт, веки тяжёлые, скулы «залиты», отпечаток подушки держится минут двадцать. Кольцо идёт туго."],
+["3","Лицо чужое. Глаза уменьшились, следы от подушки не проходят полчаса, кольцо не снимается, обувь с утра тесная."]
+];
+
+const LABS=[
+["Глюкоза натощак","4,4–5,0 ммоль/л"],
+["Инсулин натощак","до 7, лучше до 5 мкЕд/мл"],
+["HOMA-IR<br><span style=\"font-size:11.5px;color:var(--gray)\">инсулин × глюкоза ÷ 22,5</span>","до 2,0"],
+["HbA1c","до 5,4 %"],
+["ТТГ","1,0–2,0 мЕд/л"],
+["Т3 свободный","верхняя треть референса"],
+["Ферритин","50–80 нг/мл"],
+["Витамин D (25-OH)","40–60 нг/мл"],
+["СРБ высокочувствительный","до 1,0 мг/л"],
+["Гомоцистеин","до 8 мкмоль/л"]
+];
+
+const FLAGS=[
+"Потеря больше 5 % массы тела за месяц без усилий. При весе 70 кг это 3,5 кг и больше.",
+"Отёки одинаковые по всему телу с утра — лицо, руки и ноги вместе. Это вопрос к почкам и сердцу, а не к соли.",
+"Одышка при обычной нагрузке, которая раньше давалась спокойно.",
+"Пульс в покое выше 90 или ниже 50 без объяснения. Мерь утром, лёжа, до подъёма.",
+"Выпадение волос, зябкость, запор и сухость кожи одновременно — все четыре вместе. К эндокринологу до любых ограничений в еде.",
+"Боль в правом подреберье после жирной еды, особенно если отдаёт под лопатку.",
+"Ночные приступы сердцебиения с чувством паники.",
+"Любое кровотечение — между циклами, после менопаузы, из кишечника — и любая температура без понятной причины."
+];
+
+const STOP=[
+"Беременность и кормление.",
+"Камни в желчном пузыре, тяжёлые болезни почек и печени.",
+"Диабет 1 типа и инсулинотерапия — только вместе с врачом.",
+"Диабет 2 типа на препаратах, которые сами снижают сахар (гликлазид, глибенкламид и подобные) — согласуй с врачом ДО старта: дозу, рассчитанную на шесть приёмов, нельзя просто наложить на три.",
+"Расстройства пищевого поведения в активной фазе — сначала специалист.",
+"Некомпенсированный гипотиреоз — сначала эндокринолог.",
+"Аутоиммунный тиреоидит, повышенный ТТГ, приём тироксина — убираем из рациона водоросли и дульсе, остальное работает.",
+"Приём мочегонных, ингибиторов АПФ, сартанов — объём воды и калий обсуди с врачом.",
+"Варфарин — зелень и крестоцветные вводим постепенно, они сдвигают МНО."
+];
+
+const FAQ=[
+["Почему мы не считаем калории?","Потому что количество еды — одно звено из четырёх, и обычно не то, которое у тебя сломано. Можно есть 1200 калорий с высоким кортизолом и спящей щитовидкой и стоять на месте. Но и обратное неверно: количество не отменяется, оно просто выравнивается само, когда ты не голодна и не добираешь вечером."],
+["Можно ли удлинить ночное окно до 16 часов?","Не надо. Чем короче окно, тем легче недоесть — в два приёма почти никто не набирает ни белок, ни калий. А жёсткий недобор роняет активный Т3 и тянет вес в плато. 12–13 часов — точка, где польза есть, а риск недоесть ещё маленький."],
+["Я не могу без перекусов.","Первые три-четыре дня будет тянуть. Это не голод, это привычка поджелудочной — она проходит. Если тянет сильно, увеличь объём основных приёмов, а не добавляй четвёртый."],
+["Я вегетарианка. Курс подойдёт?","Да, база здесь растительная. Требование одно: белок в тарелке должен быть — бобовые, тофу, орехи, семена, при желании рыба и яйца. Иначе ты потеряешь вес вместе с мышцей."],
+["У меня ночные смены.","Ночное окно считается от твоего последнего приёма пищи, а не от часов на стене. Свет — от твоего пробуждения. Напиши мне в первый день, подстроим."],
+["Вес стоит. Что делать?","Сначала определи сценарий. Мёрзнешь, энергия просела, тяга выросла — это метаболическая адаптация, лечится одним-двумя днями с нормальными углеводами. Весы стоят, а талия уходит — это рекомпозиция, лучший вариант, не трогай ничего. Вес прыгнул за сутки, лицо припухло — это вода, уйдёт за три-семь дней. И правило одного параметра: меняешь что-то одно и ждёшь десять дней."],
+["Нужны ли добавки?","Магний вечером — почти всем. Остальное по анализам и с врачом: железо «на всякий случай» пить нельзя, селен из мультивитамина и бразильских орехов легко сложить в перебор, йод при аутоиммунном тиреоидите небезопасен."],
+["Можно ли это при инсулинорезистентности?","Это как раз тот случай, для которого курс и собран: круг разрывается не в точке «меньше есть», а в точке «дать инсулину упасть». Но если принимаешь препараты — продолжай и скажи врачу, что меняешь режим питания."]
+];
+
+const OFFER={
+  promise:"За 28 дней ты перестанешь бороться с весом и начнёшь работать с механизмом, который его держит: минус 2–5 кг, из них первые 1–3 кг — вода, и понимание, почему это не вернётся.",
+  gets:["16 уроков по четырём остановкам маршрута — простым языком, через образы",
+    "28 карточек заданий — по одному действию в день, без двадцати правил сразу",
+    "Тест по четырём звеньям с личным разбором и перепрохождением на 14-й и 28-й день",
+    "Дневник, замеры, шкала отёка, калькуляторы и таблица анализов",
+    "Меню, рецепты, списки покупок по калию, магнию, железу и клетчатке",
+    "Видео практик: дыхание, поперечная мышца, дренаж, силовая",
+    "Доступ навсегда, включая обновления"],
+  nots:["подсчёта калорий","урезания еды","запрещённых продуктов","отчётов фотографиями тарелок","слова «дефицит»"],
+  tariffs:[
+    {name:"КЛЮЧ · 28 дней",price:"5 900 ₽",badge:"Доступ навсегда",note:"Мини-апп со всей программой. Старт в любой день, свой темп, доступ остаётся навсегда.",
+     items:["16 уроков и 28 карточек заданий — по одному действию в день","Меню, списки продуктов, дневник и калькуляторы","Тест по четырём звеньям с разбором и перепрохождением на 14-й и 28-й день","Доступ навсегда, включая все обновления","Самостоятельный формат: без чата и без дедлайнов"]}
+  ],
+  guarantee:{
+    title:"Гарантия результата",
+    lead:"За 28 дней уходит 2–5 кг и 2–4 сантиметра с талии. Если у тебя не ушло <b>ничего</b> — ни килограмма и ни сантиметра — я возвращаю деньги полностью.",
+    why:"Я ставлю эту гарантию не из смелости. Я знаю, что механизм работает: когда инсулин падает, жир из клетки выходит — это биохимия, а не мотивация. Поэтому риск здесь мой, а не твой.",
+    condTitle:"Условие одно, и оно честное: курс надо пройти",
+    conds:["Отметить минимум 24 дня из 28 в приложении.",
+      "Снять замеры в первый день и в двадцать восьмой — вес, талия, живот, бёдра.",
+      "Написать мне в течение семи дней после финала и прислать эти две строчки цифр."],
+    tail:"Больше ничего не нужно: ни объяснений, ни доказательств, ни разговора «а вы точно всё делали». Цифры говорят сами. Деньги вернутся на ту же карту в течение пяти рабочих дней.",
+    note:"И про «ни килограмма, ни сантиметра» — это не придирка, а принцип курса. Весы врут: вес может стоять, пока уходит объём, и наоборот. Поэтому я смотрю на оба числа и считаю результатом движение любого из них."
+  },
+  honest:"Минус десять за месяц я не обещаю: так уходит мышца, а лицо после быстрого похудения выглядит старше."
+};
+
+const OFFERLEAD={
+zamok:"У тебя закрыт замок. Хорошая новость: твоё действие — первое в курсе, и результат ты увидишь быстрее остальных.",
+klyuch:"У тебя не поворачивается ключ. Самое дешёвое действие курса — ходьба после еды — работает именно на твоё звено, и входит на четвёртый день.",
+tormoz:"У тебя держит тормоз. Это звено ломает остальные три, поэтому работу со светом и сном я поставила на пятый день, а не в конец курса.",
+pechka:"У тебя вялая печка. Твоё звено — единственное из четырёх, где без анализов можно долго ходить по кругу, поэтому начинаем с цифр."
+};
+const state={tier:null,day:1,done:{},answers:{},deep:false,offerFrom:'stest',codeFrom:'stest',lastTop:null,scores:null,unlocked:false,start:null,hid:false,hr:false,log:{},meas:{},height:null,ch:false};
+
+/* ===== ПАМЯТЬ: код вводится один раз =====
+   Сохраняем на устройстве: доступ, отмеченные дни, дату старта и результат теста.
+   В Telegram дополнительно пишем в CloudStorage — она привязана к аккаунту,
+   поэтому доступ переживает смену телефона и очистку кэша. */
+const SKEY='unage_klyuch_v1';
+function tgCloud(){
+  try{const c=window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.CloudStorage;
+      return (c&&c.setItem)?c:null}catch(e){return null}
+}
+function midnight(ts){const d=new Date(ts||Date.now());d.setHours(0,0,0,0);return d.getTime()}
+function save(){
+  if(!state.unlocked)return;
+  let raw;
+  try{raw=JSON.stringify({u:1,tier:state.tier,done:state.done,start:state.start,scores:state.scores,top:state.lastTop,hid:state.hid,hr:state.hr,log:state.log,meas:state.meas,ht:state.height})}catch(e){return}
+  try{localStorage.setItem(SKEY,raw)}catch(e){}
+  const c=tgCloud(); if(c){try{c.setItem(SKEY,raw,function(){})}catch(e){}}
+}
+function applySaved(d){
+  if(!d||!d.u)return false;
+  state.unlocked=true;
+  state.tier=d.tier||{tier:'solo',name:'КЛЮЧ · 28 дней',chat:false};
+  state.done=d.done||{};
+  state.start=d.start||midnight();
+  state.scores=d.scores||null;
+  state.lastTop=d.top||null;
+  state.hid=!!d.hid;
+  state.hr=!!d.hr;
+  state.log=d.log||{};
+  Object.keys(state.log).forEach(function(k){
+    const r=state.log[k];
+    ['en','tg'].forEach(function(f){if(r[f]>5)r[f]=Math.max(1,Math.round(r[f]/2))});
+    if(r.st!==undefined)delete r.st;
+  });
+  state.meas=d.meas||{};
+  state.height=d.ht||null;
+  return true;
+}
+const MAXDAY=400;
+function currentDay(){
+  if(!state.start)return 1;
+  const n=Math.floor((midnight()-state.start)/86400000)+1;
+  return Math.min(MAXDAY,Math.max(1,n));
+}
+function restore(){
+  let d=null;
+  try{const raw=localStorage.getItem(SKEY); if(raw)d=JSON.parse(raw)}catch(e){}
+  if(applySaved(d)){openApp();return}
+  const c=tgCloud();
+  if(c){try{c.getItem(SKEY,function(err,val){
+    if(err||!val)return;
+    try{if(applySaved(JSON.parse(val)))openApp()}catch(e){}
+  })}catch(e){}}
+}
+function secretTap(){
+  const now=Date.now();
+  if(!state.tapT||now-state.tapT>1200){state.tapN=0}
+  state.tapT=now; state.tapN=(state.tapN||0)+1;
+  const f=document.getElementById('foot');
+  if(state.tapN>=7){
+    if(state.tapN===7){f.innerHTML='Сброс доступа на этом устройстве.<br>Нажми ещё раз, чтобы подтвердить.';return}
+    resetAccess();
+  }
+}
+function resetAccess(){
+  try{localStorage.removeItem(SKEY)}catch(e){}
+  const c=tgCloud(); if(c){try{c.removeItem(SKEY,function(){})}catch(e){}}
+  location.reload();
+}
+
+const WEEKS=["Неделя 1 · Ставим ритм","Неделя 2 · Включаем тело","Неделя 3 · Еда в реальной жизни","Неделя 4 · Закрепляем"];
+function weekOf(d){return d>28?("После курса · день "+d):WEEKS[Math.floor((d-1)/7)]}
+
+const OPEN=['stest','soffer','scode'];
+
+function go(id){
+  if(!state.unlocked&&OPEN.indexOf(id)<0)id='scode';
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  const el=document.getElementById(id); if(el)el.classList.add('on');
+  if(id==='s4'&&state.unlocked)renderDiary();
+  if(id==='s5'&&state.unlocked)renderGuarantee();
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));
+  window.scrollTo(0,0);
+}
+
+/* ===== ДОСТУП ===== */
+function checkCode(sfx){
+  const v=(document.getElementById('codeInp_'+sfx).value||'').trim().toLowerCase().replace(/\s/g,'');
+  const m=document.getElementById('codeMsg_'+sfx);
+  if(!v){m.className='codemsg err';m.textContent='Впиши код из сообщения после оплаты.';return}
+  const key=Object.keys(ACCESS_CODES).find(c=>c.toLowerCase()===v);
+  if(key){
+    const t=ACCESS_CODES[key];
+    m.className='codemsg ok';m.textContent='Код принят · тариф «'+t.name+'». Открываю курс…';
+    setTimeout(()=>unlock(t),600);
+  } else {
+    m.className='codemsg err';m.textContent='Такого кода нет. Проверь раскладку и регистр — или напиши мне, разберёмся за минуту.';
+  }
+}
+function unlock(t){
+  state.unlocked=true;
+  state.tier=t||{tier:'solo',name:'КЛЮЧ · 28 дней',chat:false};
+  state.start=midnight();
+  save();
+  openApp();
+}
+function openApp(){
+  document.getElementById('nav').classList.remove('locked');
+  document.getElementById('wrap').classList.remove('locked');
+  document.getElementById('testBack').style.display='block';
+  document.getElementById('gateLinks').style.display='none';
+  state.day=currentDay();
+  renderChatCard(); renderTask(); renderGrid(); renderTierLinks(); renderGuarantee();
+  go('s1');
+}
+function renderChatCard(){
+  const c=document.getElementById('chatCard');
+  if(state.hid){c.style.display='none';return}
+  c.style.display='';
+  c.className='card lime';
+  c.innerHTML='<div class="eyebrow">Как это работает</div><h3>С чего начать прямо сейчас</h3>'+
+    '<p style="font-size:14.5px">Каждое утро открывай «Сегодня» — там одно задание на день. Сделала — нажми «Сделала», и клетка в сетке закрасится. Отмечай только сделанное: крестиков за невыполненное здесь нет, и это не мелочь.</p>'+
+    '<p style="font-size:14.5px">Теория идёт следом за руками: сначала делаешь, через пару дней читаешь, почему это работает. Задание дня обязательное, урок — по возможности.</p>'+
+    '<p style="font-size:14.5px">Вечером отвечай на вопрос дня письменно — в дневнике или в заметках в телефоне. Это тридцать секунд, и именно эти записи ты будешь перечитывать на двадцать восьмой день.</p>'+
+    '<button class="btn link" onclick="hideChatCard()">Поняла, не показывать</button>';
+}
+function renderGuarantee(){
+  const G=OFFER.guarantee, c=document.getElementById('guarCard');
+  const done=Object.keys(state.done).filter(function(k){return state.done[k]&&Number(k)<=28}).length;
+  c.innerHTML='<div class="eyebrow">Гарантия</div><h3>'+G.title+'</h3>'+
+    '<p style="font-size:14.5px">'+G.lead+'</p>'+
+    '<p style="font-size:14.5px;margin-bottom:6px"><b>Что нужно с твоей стороны</b></p>'+
+    '<ol class="steps">'+G.conds.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ol>'+
+    '<div class="note" style="margin-top:0"><b>Отмечено дней: '+done+' из 28.</b> '+
+      (done>=24?'Условие выполнено.':'До условия осталось '+(24-done)+'. Отмечай день кнопкой «Сделала» на экране «Сегодня».')+'</div>'+
+    '<p style="font-size:13.5px;color:var(--gray);margin-bottom:0">'+G.tail+'</p>';
+}
+function renderTierLinks(){
+  document.getElementById('chatNote').textContent='Курс самостоятельный: вся программа в приложении, и она остаётся у тебя навсегда. Если что-то не сходится или хочется разобрать именно твой случай — напиши мне лично.';
+}
+
+function hideChatCard(){
+  state.hid=true; save();
+  document.getElementById('chatCard').style.display='none';
+}
+
+/* ===== ДНЕВНИК ===== */
+function num(v){
+  if(v===undefined||v===null)return null;
+  let t=String(v).trim().replace(/\s/g,'').replace(/,/g,'.').replace(/[^0-9.]/g,'');
+  const i=t.indexOf('.'); if(i>-1)t=t.slice(0,i+1)+t.slice(i+1).replace(/\./g,'');
+  if(t===''||t==='.')return null;
+  const n=parseFloat(t); return isNaN(n)?null:n;
+}
+function inRange(n,min,max){return n!==null&&n>=min&&n<=max}
+function pickRow(box,from,to,key){
+  let h='';
+  const cur=(state.log[state.day]||{})[key];
+  for(let i=from;i<=to;i++)h+='<button class="'+(cur===i?'sel':'')+'" onclick="setPick(\''+key+'\','+i+')">'+i+'</button>';
+  document.getElementById(box).innerHTML=h;
+}
+const SLEEP=[[5.5,'до 6 ч'],[6.5,'6–7'],[7.5,'7–8'],[9,'больше 8']];
+function pickSleep(){
+  const cur=(state.log[state.day]||{}).sl;
+  document.getElementById('pSl').innerHTML=SLEEP.map(function(x){
+    return '<button class="'+(cur===x[0]?'sel':'')+'" onclick="setPick(\'sl\','+x[0]+')">'+x[1]+'</button>';
+  }).join('');
+}
+function setPick(key,v){
+  if(!state.log[state.day])state.log[state.day]={};
+  const r=state.log[state.day];
+  r[key]=(r[key]===v)?null:v;
+  save(); renderPicks(); renderDyn();
+}
+function renderPicks(){
+  pickRow('pOt',0,3,'ot'); pickRow('pEn',1,5,'en'); pickRow('pTg',1,5,'tg'); pickSleep();
+  const r=state.log[state.day]||{}, n=['ot','en','tg','sl'].filter(function(k){return r[k]!==null&&r[k]!==undefined}).length;
+  const m=document.getElementById('dayMsg');
+  if(m){m.className='saved';m.textContent=n===0?'':(n===4?'День записан полностью.':'Записано '+n+' из 4.')}
+}
+function saveMeas(){
+  const msg=document.getElementById('measMsg');
+  const f=[['mW','Вес',20,300,'кг'],['mT','Талия',40,200,'см'],['mB','Живот',40,200,'см'],['mH','Бёдра',40,200,'см'],['mG','Рост',120,220,'см']];
+  const v={}, bad=[];
+  f.forEach(function(x){
+    const raw=document.getElementById(x[0]).value;
+    const n=num(raw);
+    if(raw.trim()!==''&&!inRange(n,x[2],x[3]))bad.push(x[1]);
+    v[x[0]]=inRange(n,x[2],x[3])?n:null;
+  });
+  if(bad.length){msg.className='codemsg err';msg.textContent='Проверь: '+bad.join(', ')+'. Похоже на опечатку — можно писать через запятую, например 61,2.';return}
+  if(v.mG)state.height=v.mG;
+  if(v.mW===null&&v.mT===null&&v.mB===null&&v.mH===null){msg.className='codemsg err';msg.textContent='Впиши хотя бы одно значение.';return}
+  state.meas[state.day]={w:v.mW,t:v.mT,b:v.mB,h:v.mH};
+  save(); renderDyn();
+  const parts=[];
+  if(v.mW!==null)parts.push(fmt(v.mW)+' кг');
+  if(v.mT!==null)parts.push('талия '+fmt(v.mT));
+  if(v.mB!==null)parts.push('живот '+fmt(v.mB));
+  if(v.mH!==null)parts.push('бёдра '+fmt(v.mH));
+  msg.className='saved';
+  msg.textContent='День '+state.day+' записан: '+parts.join(', ')+'.';
+  setTimeout(function(){const m=document.getElementById('measMsg');if(m){m.textContent='';m.className='saved'}},4000);
+}
+function measDays(){return Object.keys(state.meas).map(Number).sort(function(a,b){return a-b})}
+function logDays(){return Object.keys(state.log).map(Number).sort(function(a,b){return a-b})}
+function avgRange(key,from,to){
+  let sum=0,n=0;
+  for(let d=from;d<=to;d++){const r=state.log[d];if(r&&r[key]!==null&&r[key]!==undefined){sum+=r[key];n++}}
+  return n?sum/n:null;
+}
+function fmt(v,d){return (v===null||v===undefined)?'—':v.toFixed(d===undefined?1:d).replace('.',',').replace(',0','')}
+function delta(now,was,unit,lowerBetter){
+  if(now===null||was===null)return '<b>—</b>';
+  const d=now-was, cls=(lowerBetter?(d<0):(d>0))?'down':(d===0?'':'up');
+  const sign=d>0?'+':'−';
+  return '<b class="'+cls+'">'+fmt(now)+' '+unit+'</b> <span>'+(d===0?'без изменений':sign+fmt(Math.abs(d))+' '+unit)+'</span>';
+}
+function spark(vals,lowerBetter){
+  const v=vals.filter(function(x){return x!==null&&x!==undefined});
+  if(v.length<2)return '';
+  let mn=Math.min.apply(null,v),mx=Math.max.apply(null,v);
+  if(mx===mn){mx=mn+1}
+  const W=100,H=30,step=W/(v.length-1);
+  let pts=v.map(function(x,i){return (i*step).toFixed(1)+','+(H-((x-mn)/(mx-mn))*H).toFixed(1)}).join(' ');
+  const col=lowerBetter?'#9CB53B':'#9CB53B';
+  return '<svg class="chart" viewBox="0 0 100 30" preserveAspectRatio="none">'+
+    '<polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+}
+function chartBlock(title,vals,first,last,unit,lowerBetter){
+  const sp=spark(vals,lowerBetter);
+  if(!sp)return '';
+  return '<div style="margin:14px 0 0"><div class="chlbl"><span>'+title+'</span><span>'+fmt(first)+' → '+fmt(last)+' '+unit+'</span></div>'+sp+'</div>';
+}
+function metric(k){
+  const md=measDays(); let a=null,z=null,ad=null,zd=null;
+  md.forEach(function(d){
+    const v=state.meas[d][k];
+    if(v!==null&&v!==undefined){if(a===null){a=v;ad=d} z=v;zd=d}
+  });
+  return {a:a,z:z,ad:ad,zd:zd};
+}
+function statRow(name,m,unit){
+  if(m.z===null)return '';
+  if(m.ad===m.zd)return '<div class="stat"><span>'+name+'</span><b>'+fmt(m.z)+' '+unit+' <span class="mini">первый замер</span></b></div>';
+  return '<div class="stat"><span>'+name+'</span>'+delta(m.z,m.a,unit,true)+'</div>';
+}
+function moodRow(key,name){
+  const ld=logDays(); if(!ld.length)return '';
+  const lastDay=ld[ld.length-1], from=Math.max(1,lastDay-6);
+  const w1=avgRange(key,1,7), w2=avgRange(key,from,lastDay);
+  if(w2===null)return '';
+  if(w1===null||lastDay<=7)return '<div class="stat"><span>'+name+'</span><b>'+fmt(w2)+'</b></div>';
+  const d=w2-w1, better=(key==='en')?(d>0):(d<0);
+  return '<div class="stat"><span>'+name+'</span><b class="'+(d===0?'':(better?'down':'up'))+'">'+fmt(w1)+' → '+fmt(w2)+'</b></div>';
+}
+function toggleCharts(){
+  const b=document.getElementById('chBox');
+  state.ch=!state.ch;
+  b.style.display=state.ch?'block':'none';
+  document.getElementById('chBtn').textContent=state.ch?'Скрыть графики':'Показать графики';
+}
+function renderDyn(){
+  const box=document.getElementById('dynBody');
+  const md=measDays(), ld=logDays();
+  if(!md.length&&!ld.length){
+    box.innerHTML='<p style="font-size:14.5px;margin-bottom:0">Пока пусто. Занеси первые замеры и отметь сегодняшний вечер — и здесь появится твоя динамика.</p>';
+    return;
+  }
+  let h='';
+  const W=metric('w'), T=metric('t'), B=metric('b'), H=metric('h');
+
+  if(md.length===1){
+    const a=state.meas[md[0]], parts=[];
+    if(a.w!==null)parts.push(fmt(a.w)+' кг');
+    if(a.t!==null)parts.push('талия '+fmt(a.t)+' см');
+    if(a.b!==null)parts.push('живот '+fmt(a.b)+' см');
+    if(a.h!==null)parts.push('бёдра '+fmt(a.h)+' см');
+    h+='<p style="font-size:14.5px"><b>Точка А записана:</b> '+parts.join(', ')+'.</p>'+
+       '<p style="font-size:14.5px">Следующий замер — через неделю, в то же утро. Тогда здесь появится, что ушло и насколько.</p>'+
+       '<p style="font-size:14.5px;margin-bottom:0">А отёк, энергию и тягу отмечай каждый вечер: они двигаются раньше веса, и первыми покажут, что процесс пошёл.</p>';
+  }
+
+  if(md.length>1){
+    const dw=(W.ad!==W.zd&&W.a!==null)?(W.a-W.z):null;
+    let dcm=0, hasCm=false;
+    [T,B,H].forEach(function(m){if(m.ad!==m.zd&&m.a!==null){dcm+=(m.a-m.z);hasCm=true}});
+    h+='<div class="hero">'+
+      '<div><div class="hn'+(dw&&dw>0?'':' flat')+'">'+(dw===null?'—':(dw>0?'−'+fmt(dw):(dw<0?'+'+fmt(-dw):'0'))+' кг')+'</div><div class="hs">вес от старта</div></div>'+
+      '<div><div class="hn'+(hasCm&&dcm>0?'':' flat')+'">'+(!hasCm?'—':(dcm>0?'−'+fmt(dcm):(dcm<0?'+'+fmt(-dcm):'0'))+' см')+'</div><div class="hs">объёмы от старта</div></div>'+
+      '</div>';
+    h+='<div class="sechead">Замеры</div>';
+    h+=statRow('Вес',W,'кг')+statRow('Талия',T,'см')+statRow('Живот',B,'см')+statRow('Бёдра',H,'см');
+    if(W.z!==null&&W.a!==null&&T.z!==null&&T.a!==null){
+      const dwt=W.a-W.z, dtt=T.a-T.z;
+      if(dtt>=1&&dwt<=0.4)h+='<div class="note" style="margin-top:14px"><b>Весы стоят, а талия уходит.</b> Это лучший из сценариев, хотя ощущается как худший: жир уходит, мышца остаётся, а килограмм остаётся килограммом. Смотри на сантиметр и не взвешивайся две недели.</div>';
+      else if(dwt>=1.5&&dtt<=0.4)h+='<div class="note" style="margin-top:14px"><b>Вес падает, а талия стоит.</b> Так уходит вода или мышца, а не жир с живота. Проверь, есть ли белок в каждом приёме, и не ускоряйся.</div>';
+    }
+  }
+
+  if(ld.length){
+    const rows=moodRow('ot','Отёк лица')+moodRow('en','Энергия в 16:00')+moodRow('tg','Тяга вечером');
+    if(rows){
+      h+='<div class="sechead">Самочувствие</div>';
+      h+=(logDays()[logDays().length-1]>7?'<p class="mini" style="margin:0 0 2px">первая неделя → последние семь дней</p>':'<p class="mini" style="margin:0 0 2px">среднее за записанные дни</p>');
+      h+=rows;
+    }
+  }
+
+  // графики под кнопкой
+  let ch='';
+  if(md.length>1){
+    ch+=chartBlock('Вес',md.map(function(d){return state.meas[d].w}),W.a,W.z,'кг',true);
+    ch+=chartBlock('Талия',md.map(function(d){return state.meas[d].t}),T.a,T.z,'см',true);
+  }
+  const ots=[],ens=[];
+  ld.forEach(function(d){const r=state.log[d];if(r){if(r.ot!==null&&r.ot!==undefined)ots.push(r.ot);if(r.en!==null&&r.en!==undefined)ens.push(r.en)}});
+  while(ots.length>28)ots.shift();
+  while(ens.length>28)ens.shift();
+  ch+=chartBlock('Отёк по дням',ots,ots[0],ots[ots.length-1],'',true);
+  ch+=chartBlock('Энергия по дням',ens,ens[0],ens[ens.length-1],'',false);
+  if(ch)h+='<button class="toggle" id="chBtn" onclick="toggleCharts()">'+(state.ch?'Скрыть графики':'Показать графики')+'</button><div id="chBox" style="display:'+(state.ch?'block':'none')+'">'+ch+'</div>';
+
+  // справочно
+  h+='<div class="sechead">Справочно</div>';
+  const done=Object.keys(state.done).filter(function(k){return state.done[k]&&Number(k)<=28}).length;
+  h+='<div class="stat"><span>Закрыто дней<span class="mini"><br>для гарантии нужно 24 из 28</span></span><b>'+done+' / 28</b></div>';
+  if(W.z!==null)h+='<div class="stat"><span>Норма воды<span class="mini"><br>30 мл на кг, между приёмами</span></span><b>'+(Math.round(W.z*30/50)*50)+' мл</b></div>';
+  if(state.height&&T.z!==null){
+    const wh=T.z/state.height;
+    h+='<div class="stat"><span>Талия к росту<span class="mini"><br>ориентир — меньше 0,5</span></span><b class="'+(wh<0.5?'down':'up')+'">'+wh.toFixed(2).replace('.',',')+'</b></div>';
+  }
+  const sl=[];
+  ld.forEach(function(d){const r=state.log[d];if(r&&r.sl)sl.push(r.sl)});
+  while(sl.length>28)sl.shift();
+  if(sl.length)h+='<div class="stat"><span>Средний сон</span><b>≈ '+fmt(sl.reduce(function(a,b){return a+b},0)/sl.length)+' ч</b></div>';
+  box.innerHTML=h;
+}
+function dateOfDay(d){
+  if(!state.start)return '';
+  const dt=new Date(state.start+(d-1)*86400000);
+  const wd=['вс','пн','вт','ср','чт','пт','сб'][dt.getDay()];
+  const mo=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][dt.getMonth()];
+  return wd+', '+dt.getDate()+' '+mo;
+}
+function renderDiary(){
+  const today=currentDay();
+  document.getElementById('dayTtl').textContent='День '+state.day;
+  document.getElementById('dayHint').textContent=state.day===today?('сегодня · '+dateOfDay(state.day)):dateOfDay(state.day);
+  document.getElementById('jPrev').disabled=state.day===1;
+  document.getElementById('jNext').disabled=state.day>=MAXDAY;
+  document.getElementById('jToday').innerHTML=(state.day===today)?'':
+    '<button class="btn link" style="margin:-6px 0 8px" onclick="setDay('+today+')">Вернуться к сегодняшнему дню — '+today+'</button>';
+  renderPicks();
+  const md=measDays(), last=md.length?state.meas[md[md.length-1]]:{};
+  const cur=state.meas[state.day];
+  const v=cur||{};
+  document.getElementById('mW').value=v.w!==undefined&&v.w!==null?v.w:'';
+  document.getElementById('mT').value=v.t!==undefined&&v.t!==null?v.t:'';
+  document.getElementById('mB').value=v.b!==undefined&&v.b!==null?v.b:'';
+  document.getElementById('mH').value=v.h!==undefined&&v.h!==null?v.h:'';
+  document.getElementById('mG').value=state.height||'';
+  if(!cur&&last.w){document.getElementById('mW').placeholder='в прошлый раз '+last.w}
+  renderDyn();
+}
+
+/* ===== ВИДЕО ===== */
+function videoHTML(id,label){
+  return '<div class="vwrap"><div class="vbox" id="yt_'+id+'" onclick="playYT(\''+id+'\')">'+
+    '<div class="vplay">&#9654;</div><div class="vtxt">'+label+'</div></div>'+
+    '<a class="btn link" href="https://youtube.com/shorts/'+id+'" target="_blank" rel="noopener">Не открылось — посмотреть на YouTube</a></div>';
+}
+function playYT(id){
+  const b=document.getElementById('yt_'+id); if(!b)return;
+  b.classList.add('playing');
+  b.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+}
+
+/* ===== СЕГОДНЯ ===== */
+function setDay(d){
+  if(d<1||d>MAXDAY)return;
+  state.day=d; renderTask(); renderGrid();
+  if(document.getElementById('s4').classList.contains('on'))renderDiary();
+}
+const AFTER={
+ title:"Жизнь после курса",
+ intro:"Двадцать восемь дней позади, а тело осталось. Дальше приложение работает как трекер: задания закончились, но дневник и замеры продолжают считать — доступ у тебя навсегда.",
+ steps:["Веди дневник дальше теми же четырьмя касаниями. Отёк, энергия и тяга — это по-прежнему самые быстрые показатели, и через три месяца график скажет о тебе больше, чем весы.",
+  "Замеры — раз в неделю, в то же утро. Динамика считается от самого первого замера, так что весь путь виден целиком.",
+  "Открой «Практику» и держи двенадцать действий. Это не диета, а конструкция дня — её можно вести годами, потому что в ней нет запретов.",
+  "Правило 80/20: пять дней база, два — жизнь. Тело без хронического воспаления и с восстановленной метаболической гибкостью спокойно это переваривает.",
+  "Если вес встал — вернись к двадцать пятому дню: там три сценария и правило одного параметра."],
+ why:"Курс заканчивается, а маршрут остаётся тем же: склад, дорога, тормоз, печка.\n\nВес возвращается не потому, что «диета кончилась», а потому что возвращается прежний режим: шесть перекусов, четыре часа сна и вечерний сахар. Физиология не знает исключений — но она работает и в обратную сторону.\n\nПоэтому смысл этих дней не в том, чтобы продолжать худеть. Он в том, чтобы увидеть на своих же цифрах: то, что ты теперь делаешь по привычке, продолжает работать без усилий.",
+ q:"Что из двенадцати действий осталось с тобой без напоминаний?"
+};
+function renderTask(){
+  renderCards();
+  if(state.day>28)return renderAfter();
+  const t=TASKS[state.day-1];
+  document.getElementById('dNum').textContent='День '+state.day;
+  document.getElementById('dWeek').textContent=weekOf(state.day);
+  document.getElementById('dPrev').disabled=state.day===1;
+  document.getElementById('dNext').disabled=false;
+  document.getElementById('taskKind').textContent =
+    (state.day<=12) ? ('Новое действие · '+state.day+' из 12')
+    : ([14,21,28].indexOf(state.day)>-1 ? 'Сверка' : 'Разбор');
+  document.getElementById('taskTitle').textContent=t[0];
+  document.getElementById('taskIntro').textContent=t[1];
+  document.getElementById('taskSteps').innerHTML=t[2].map(s=>'<li>'+s+'</li>').join('');
+  document.getElementById('taskVideo').innerHTML=t[5]?videoHTML(t[5],'Видео-пример: как это выглядит'):'';
+  document.getElementById('taskWhy').innerHTML='<p>'+t[3].split('\n\n').join('</p><p>')+'</p>';
+  document.getElementById('taskQ').innerHTML='<b>Вопрос вечера:</b> '+t[4];
+  const b=document.getElementById('doneBtn');
+  if(state.done[state.day]){b.textContent='Сделано ✓';b.className='btn ghost'}
+  else{b.textContent='Сделала';b.className='btn lime'}
+}
+function renderAfter(){
+  renderCards();
+  document.getElementById('dNum').textContent='День '+state.day;
+  document.getElementById('dWeek').textContent=weekOf(state.day);
+  document.getElementById('dPrev').disabled=false;
+  document.getElementById('dNext').disabled=state.day>=MAXDAY;
+  document.getElementById('taskKind').textContent='Режим трекера';
+  document.getElementById('taskTitle').textContent=AFTER.title;
+  document.getElementById('taskIntro').textContent=AFTER.intro;
+  document.getElementById('taskSteps').innerHTML=AFTER.steps.map(function(x){return '<li>'+x+'</li>'}).join('');
+  document.getElementById('taskVideo').innerHTML='';
+  document.getElementById('taskWhy').innerHTML='<p>'+AFTER.why.split('\n\n').join('</p><p>')+'</p>';
+  document.getElementById('taskQ').innerHTML='<b>Вопрос вечера:</b> '+AFTER.q;
+  const b=document.getElementById('doneBtn');
+  if(state.done[state.day]){b.textContent='Сделано ✓';b.className='btn ghost'}
+  else{b.textContent='Сделала';b.className='btn lime'}
+}
+function toggleDone(){
+  state.done[state.day]=!state.done[state.day];
+  renderTask(); renderGrid(); save(); renderGuarantee();
+}
+function renderGrid(){
+  let h='';
+  for(let i=1;i<=28;i++){
+    h+='<div class="cell'+(state.done[i]?' done':'')+(i===state.day?' now':'')+'" onclick="setDay('+i+')">'+i+'</div>';
+  }
+  document.getElementById('grid').innerHTML=h;
+  const n=Object.keys(state.done).filter(function(k){return state.done[k]&&Number(k)<=28}).length;
+  if(state.day>28){
+    document.getElementById('progText').textContent='Курс пройден: '+n+' из 28 дней закрыто. Сейчас идёт '+state.day+'-й день от старта — дневник считает дальше.';
+    document.getElementById('grid').innerHTML=document.getElementById('grid').innerHTML;
+    return;
+  }
+  document.getElementById('progText').textContent='Закрыто дней: '+n+' из 28. Отмечай только сделанное — крестиков за невыполненное здесь нет, и это не мелочь.';
+}
+
+/* ===== ТЕОРИЯ ===== */
+function renderLessons(){
+  let h='',cur='';
+  LESSONS.forEach((l,i)=>{
+    if(l[0]!==cur){cur=l[0];h+='<div class="weekhead">'+cur+'</div>'}
+    h+='<button class="row" onclick="openLesson('+i+')"><span class="num">Урок '+l[1]+'</span><span class="ttl">'+l[2]+'</span></button>';
+  });
+  document.getElementById('lessonList').innerHTML=h;
+}
+function openLesson(i){
+  const l=LESSONS[i];
+  document.getElementById('lsWeek').textContent=l[0]+' · урок '+l[1];
+  document.getElementById('lsTitle').textContent=l[2];
+  document.getElementById('lsBody').innerHTML=l[3];
+  go('slesson');
+}
+
+/* ===== ПРАКТИКА / ДНЕВНИК ===== */
+function renderStatic(){
+  document.getElementById('habitList').innerHTML=HABITS.map((hb,i)=>
+    '<div class="card"><div class="eyebrow">Действие '+(i+1)+'</div><h4>'+hb[0]+'</h4><p style="margin:0;font-size:14.5px">'+hb[1]+'</p></div>').join('');
+  document.getElementById('stopList').innerHTML=STOP.map(s=>'<li>'+s+'</li>').join('');
+  document.getElementById('scaleTbl').innerHTML='<tr><th>Балл</th><th>Как выглядит</th></tr>'+
+    SCALE.map(s=>'<tr><td><b>'+s[0]+'</b></td><td>'+s[1]+'</td></tr>').join('');
+  document.getElementById('labTbl').innerHTML='<tr><th>Показатель</th><th>Оптимум</th></tr>'+
+    LABS.map(s=>'<tr><td>'+s[0]+'</td><td>'+s[1]+'</td></tr>').join('');
+  document.getElementById('flagList').innerHTML=FLAGS.map(s=>'<li>'+s+'</li>').join('');
+  document.getElementById('faqList').innerHTML=FAQ.map((f,i)=>
+    '<div style="border-bottom:1px solid var(--line);padding:11px 0"><div style="font-weight:600;font-size:15px;cursor:pointer" onclick="var e=document.getElementById(\'fa'+i+'\');e.style.display=e.style.display===\'block\'?\'none\':\'block\'">'+f[0]+'</div><div id="fa'+i+'" style="display:none;font-size:14.5px;color:var(--gray);padding-top:8px">'+f[1]+'</div></div>').join('');
+  document.getElementById('breathVideo').innerHTML=videoHTML('h8ZUbggFDBg','Видео-пример: дыхание диафрагмой');
+  document.getElementById('lnkAuthor').href=LINKS.author;
+  renderTierLinks();
+  document.getElementById('codeBoxG').innerHTML=codeBoxHTML('g','Код доступа');
+}
+
+/* ===== ТЕСТ ===== */
+function renderTest(){
+  document.getElementById('qlist').innerHTML=QUESTIONS.map((q,i)=>
+    '<div class="qwrap"><div class="qtext"><b>'+(i+1)+'.</b> '+q[0]+'</div><div class="opts">'+
+    ANSWERS.map((a,v)=>'<button class="opt" id="o'+i+'_'+v+'" onclick="pick('+i+','+v+')">'+a+'</button>').join('')+
+    '</div></div>').join('');
+  document.getElementById('testOut').innerHTML='';
+}
+function pick(i,v){
+  state.answers[i]=v;
+  ANSWERS.forEach((a,k)=>document.getElementById('o'+i+'_'+k).classList.toggle('sel',k===v));
+}
+function resetTest(){
+  state.answers={};renderTest();
+  if(!state.unlocked)document.getElementById('gateLinks').style.display='block';
+  go('stest');
+}
+function calcTest(){
+  const n=Object.keys(state.answers).length;
+  const out=document.getElementById('testOut');
+  if(n<QUESTIONS.length){
+    out.innerHTML='<div class="warn">Отвечено '+n+' из '+QUESTIONS.length+'. Ответь на все — иначе картинка перекосится.</div>';
+    out.scrollIntoView({behavior:'smooth'});return;
+  }
+  const sc={zamok:0,klyuch:0,tormoz:0,pechka:0};
+  QUESTIONS.forEach((q,i)=>{sc[q[1]]+=state.answers[i]});
+  const order=Object.keys(sc).sort((a,b)=>sc[b]-sc[a]),top=order[0];
+  state.lastTop=top; state.scores=sc;
+  let h='<div class="card"><div class="eyebrow">Твоя цепочка</div>'+chainHTML(sc)+
+    '<p style="font-size:13.5px;color:var(--gray);margin:0">0–3 звено работает · 4–6 под вопросом · 7–12 сломано</p></div>';
+  h+='<div class="card">'+RESULTS[top]+'</div>';
+  if(order.filter(k=>sc[k]>=7).length>1)h+=MULTI;
+  if(state.unlocked){
+    h+='<div class="card lime"><div class="eyebrow">Что дальше</div><p style="font-size:14.5px;margin-bottom:0">Сравни с первым результатом: обычно к середине курса одно звено уходит из красной зоны в жёлтую. Своему главному звену удели чуть больше внимания — не вместо программы, а внутри неё.</p>'+
+       '<button class="btn lime" style="margin-top:14px" onclick="go(\'s1\')">Вернуться к заданию дня</button></div>';
+  } else {
+    h+='<div class="card lime"><div class="eyebrow">Что дальше</div><h3>Это диагноз. Теперь нужна система</h3>'+
+       '<p style="font-size:14.5px">'+OFFERLEAD[top]+'</p>'+
+       '<p style="font-size:14.5px">Ты знаешь своё звено. Но звенья связаны, и чинить придётся всю цепочку — по одному действию в день, 28 дней, с разбором именно твоего случая.</p><p style="font-size:13.5px;color:var(--gray);margin-bottom:0">Здесь я объясняю через образы. Как это выглядит на уровне молекул — с названиями ферментов и каскадов — лежит внутри курса, в слое «Глубже» под каждым уроком. Там я не упрощаю.</p></div>';
+    h+=offerHTML('t');
+  }
+  out.innerHTML=h;
+  save();
+  if(!state.unlocked)document.getElementById('gateLinks').style.display='none';
+  out.scrollIntoView({behavior:'smooth'});
+}
+function chainHTML(sc){
+  let h='<div class="chain">';
+  ['zamok','klyuch','tormoz','pechka'].forEach(k=>{
+    const s=sc[k],cls=s>=7?'r':(s>=4?'y':'g');
+    h+='<div class="'+cls+'"><b>'+NAMES[k][0]+'</b>'+NAMES[k][1]+'<div class="score">'+s+' / 12</div></div>';
+  });
+  return h+'</div>';
+}
+function hideRoute(){
+  state.hr=true; save();
+  document.getElementById('routeCard').style.display='none';
+}
+function renderCards(){
+  document.getElementById('routeCard').style.display=(state.hr||state.day>28)?'none':'';
+  const c=document.getElementById('chainCard'), show=(state.day===14||state.day===28);
+  c.style.display=show?'':'none';
+  if(!show)return;
+  const t=document.getElementById('chainText');
+  t.textContent=state.day===14
+    ? 'Половина пути. Перепройди тест и сравни с первым результатом: обычно к середине одно звено уходит из красной зоны в жёлтую, и это видно раньше, чем что-либо на весах.'
+    : 'Последний день. Перепройди тест и посмотри, как изменилась цепочка за двадцать восемь дней — это и есть ответ на вопрос, что с тобой произошло.';
+  renderChainMini();
+}
+function renderChainMini(){
+  const box=document.getElementById('chainMini');
+  if(!state.scores){box.innerHTML='';return}
+  box.innerHTML=chainHTML(state.scores);
+  document.getElementById('chainTtl').textContent='Было: '+NAMES[state.lastTop][0].toLowerCase()+' · '+NAMES[state.lastTop][1];
+}
+
+/* ===== ОФФЕР + ОПЛАТА + КОД ===== */
+function codeBoxHTML(sfx,head){
+  return '<div class="card"><div class="eyebrow">'+(head||'Шаг 3 · код доступа')+'</div>'+
+    '<h3>Введи код — и курс откроется</h3>'+
+    '<p style="font-size:14.5px">Код приходит на почту, которую ты указала при оплате — письмо приходит сразу. Регистр и лишние пробелы не важны: можно просто скопировать код из письма и вставить сюда.</p>'+
+    '<p style="font-size:13.5px;color:var(--gray)">Письма нет через пять минут — загляни в папку «Спам» и «Промоакции». Чаще всего оно там.</p>'+
+    '<div class="codebox"><input id="codeInp_'+sfx+'" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="Kluch0000" onkeydown="if(event.key===\'Enter\')checkCode(\''+sfx+'\')">'+
+    '<button onclick="checkCode(\''+sfx+'\')">Открыть</button></div>'+
+    '<div class="codemsg" id="codeMsg_'+sfx+'"></div>'+
+    '<p style="font-size:13.5px;color:var(--gray);margin:10px 0 0">Письмо не нашлось или код не подходит — напиши мне, разберёмся за минуту.</p>'+
+    '<a class="btn ghost" style="margin-top:12px" href="'+LINKS.author+'" target="_blank" rel="noopener">Написать Татьяне</a></div>';
+}
+function offerHTML(sfx){
+  let h='<div class="card flat"><h1>КЛЮЧ</h1><p style="font-size:15px;color:var(--gray)">28 дней о том, как открыть жировую клетку. Без подсчёта калорий и без урезания еды.</p></div>';
+  h+='<div class="card"><div class="eyebrow">Обещание</div><p style="font-size:15px">'+OFFER.promise+'</p><p style="font-size:14px;color:var(--gray);margin-bottom:0">'+OFFER.honest+'</p></div>';
+  h+='<div class="card"><div class="eyebrow">Что внутри</div><ul class="plain" style="font-size:14.5px">'+OFFER.gets.map(g=>'<li>'+g+'</li>').join('')+'</ul>'+
+     '<p style="font-size:14.5px;margin:12px 0 0"><b>Чего здесь нет:</b> '+OFFER.nots.join(', ')+'.</p></div>';
+  h+='<div class="card lime"><div class="eyebrow">Как открывается доступ</div>'+
+     '<ol class="steps" style="margin-bottom:0">'+
+     '<li>Оплачиваешь курс — тариф один, выбирать не нужно.</li>'+
+     '<li>Сразу после оплаты на твою почту приходит письмо с <b>кодом доступа</b>.</li>'+
+     '<li>Вводишь код ниже — и приложение открывается целиком: 28 заданий, 16 уроков, практики, дневник и калькуляторы. Навсегда.</li>'+
+     '</ol></div>';
+  h+='<div class="card flat"><div class="eyebrow">Шаг 1 · участие</div></div>';
+  OFFER.tariffs.forEach(t=>{
+    h+='<div class="tar'+(t.badge?' hi':'')+'">'+(t.badge?'<div class="badge">'+t.badge+'</div>':'')+
+       '<div class="nm">'+t.name+'</div><div class="pr">'+t.price+'</div><div class="nt">'+t.note+'</div>'+
+       '<ul>'+t.items.map(i=>'<li>'+i+'</li>').join('')+'</ul>'+
+       '<a class="btn '+(t.badge?'prim':'ghost')+'" style="margin-top:14px" href="'+LINKS.pay+'" target="_blank" rel="noopener">Оплатить · '+t.price+'</a></div>';
+  });
+  const G=OFFER.guarantee;
+  h+='<div class="card lime"><div class="eyebrow">Гарантия</div><h3>'+G.title+'</h3>'+
+     '<p style="font-size:15px">'+G.lead+'</p>'+
+     '<p style="font-size:14.5px">'+G.why+'</p>'+
+     '<p style="font-size:14.5px;margin-bottom:6px"><b>'+G.condTitle+'</b></p>'+
+     '<ol class="steps">'+G.conds.map(c=>'<li>'+c+'</li>').join('')+'</ol>'+
+     '<p style="font-size:14.5px">'+G.tail+'</p>'+
+     '<p style="font-size:13.5px;color:var(--gray);margin-bottom:0">'+G.note+'</p></div>';
+  h+='<div class="card flat"><div class="eyebrow">Шаг 2 · оплата</div></div>';
+  h+='<a class="btn prim" href="'+LINKS.pay+'" target="_blank" rel="noopener">Оплатить и получить код</a>';
+  h+=codeBoxHTML(sfx);
+  h+='<div class="card"><div class="eyebrow">Кому не подходит</div><ul class="plain" style="font-size:14px">'+STOP.map(s=>'<li>'+s+'</li>').join('')+'</ul></div>';
+  return h;
+}
+function toCode(from){
+  state.codeFrom=from||'stest';
+  const m=document.getElementById('codeMsg_g'); if(m)m.textContent='';
+  go('scode');
+}
+function openOffer(top){
+  const cur=(document.querySelector('.screen.on')||{id:'stest'}).id;
+  state.offerFrom=(cur==='soffer')?(state.unlocked?'s1':'stest'):cur;
+  let h='';
+  if(top)h+='<div class="card lime"><div class="eyebrow">Твой результат</div><h2>'+NAMES[top][0]+' · '+NAMES[top][1]+'</h2><p style="margin-bottom:0;font-size:14.5px">'+OFFERLEAD[top]+'</p></div>';
+  h+=offerHTML('o');
+  h+='<button class="btn link" onclick="go(state.unlocked?\'s1\':\'stest\')">'+(state.unlocked?'Вернуться к заданию дня':'Вернуться к тесту')+'</button>';
+  document.getElementById('offerBody').innerHTML=h;
+  go('soffer');
+}
+
+/* ===== INIT ===== */
+renderTask();renderGrid();renderLessons();renderStatic();renderTest();renderChainMini();
+try{
+  const tg=window.Telegram&&window.Telegram.WebApp;
+  if(tg){
+    tg.ready();
+    try{tg.expand()}catch(e){}
+    try{tg.setHeaderColor('#FFFFFF')}catch(e){}
+    try{tg.setBackgroundColor('#F7F6F2')}catch(e){}
+    try{tg.disableVerticalSwipes()}catch(e){}
+  }
+}catch(e){}
+restore();
+
+</script>
+</body>
+</html>
